@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= dynamic_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <%= render 'layouts/header' %>
+    <div class="container">
+        <p>Remember token in cookies --- <%= cookies[:remember_token] %></p> 
+        <p>Encrypted Remember token in cookies --- <%= Digest::SHA1.hexdigest(cookies[:remember_token].to_s) %></p>
+
+        <p>Token in base (id 4)   ---   <%= User.find(4).remember_token %></p>
+        
+
+        <p>Current_user   ---   <%= current_user.name if !current_user.nil?  %></p>
+
+         <p><%= User.find_by(remember_token: Digest::SHA1.hexdigest(cookies[:remember_token].to_s)).name if !User.find_by(remember_token: Digest::SHA1.hexdigest(cookies[:remember_token].to_s)).nil? %></p>
+
+<p><%= Digest::SHA1.hexdigest(cookies[:remember_token].to_s) == User.find(4).remember_token %></p>
+
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+        <% end %>
+      <%= yield %>
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
+
+    </div>
+  </body>
+</html>
+ 
