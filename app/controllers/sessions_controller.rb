@@ -13,7 +13,10 @@ class SessionsController < ApplicationController
       if user.authenticate(params[:session][:password])
         flash[:success] = "Welcome back, #{user.name}!!!"
         sign_in user
-        redirect_to user
+        
+        redirect_to right_way(user)
+        clear_session
+        
       else
         flash.now[:error] = "Wrong password"
         render 'new'

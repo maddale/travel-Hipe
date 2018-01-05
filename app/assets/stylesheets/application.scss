@@ -204,3 +204,15 @@ input {
   @extend .error;
 }
 
+.users{
+
+  li {
+    float: auto;
+    list-style: none;
+    border-top: 1px solid $grayLighter;
+    padding: 12px 0;
+    }
+  
+
+} 
+

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_action :sign_in_user, only: [:show, :edit, :update]
- #  before_action :admin_user, 
+  before_action :sign_in_user, only: [:show, :edit, :update, :index]
+  before_action :admin_user, only: [:destroy] 
   
   def index
     @users = User.all
@@ -42,18 +42,35 @@ class UsersController < ApplicationController
     end
   end
   
- 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = "User #{@user.name} successfully removed from db."
+    redirect_to users_path
+  end
 
   private
+   
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
     def sign_in_user
-      unless singed_in?
-        flash[:notice] = "Plese, Sign Up"
-        redirect_to root_path
+      unless singed_in?  
+        session[:prev_path] = request.url if request.get?
+        flash[:notice] = "Plese, Sign in"
+        redirect_to '/signin'
+      
       end
     end
+
+    def admin_user
+      unless user_admin?
+      flash[:error] = "Only Admin may remove users"
+      redirect_to root_path
+      end
+    end
+
+    
 
 end

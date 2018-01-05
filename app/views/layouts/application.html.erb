@@ -15,7 +15,7 @@
   <%= render 'layouts/header' %>
     <div class="container">
 
-    <%= current_user.name if !current_user.nil? %>
+    nil? - <%= session[:prev_path].nil? %><br><%= session[:prev_path] %>
         
         <% flash.each do |key, value| %>
           <%= content_tag(:div, value, class: "alert alert-#{key}") %>

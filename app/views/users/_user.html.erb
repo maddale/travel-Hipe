@@ -1,8 +1,16 @@
+
+
 <li>
-	<%= gravatar_for(user, 51) %>
-	<%= user.name %><br>
-	<%= user.email %>
+	<%= gravatar_for(user, 82) %>
+	<strong><%= link_to user.name, user_path(user) %></strong><br>
+	<small><%= user.email %></small>
 	<br>
-	<br>
-	<br>
+		<small><small><em>Signed in: <%= user.created_at %></em></small>
+			<br>
+			<%= link_to "View", user_path(user) %> 
+				<% if user_admin? || current_user == user %>
+				| <%= link_to "Delete", user_path(user), method: :delete, data: { confirm: "Are yoy sure?"} %>
+				<% end %>
+			</small>
+		
 </li>
