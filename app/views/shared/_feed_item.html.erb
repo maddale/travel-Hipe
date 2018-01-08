@@ -1,0 +1,6 @@
+<li>
+	<%= gravatar_for(feed_item.user, 30) %>
+	<span class="content"><%= feed_item.content %></span>
+	<small><span class="timestamp">Posted <%= time_ago_in_words(feed_item.created_at) %> ago</span></small>
+
+</li>

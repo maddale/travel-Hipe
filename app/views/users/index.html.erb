@@ -2,10 +2,15 @@
 
 <div class="row">
 <div class="span10 offset1">
+<div class="pagination">
+<%= will_paginate @users, class: "digg_pagination"%><br>
+</div>
 <ul class="users">
 	
 	<%= render @users %>
 
 </ul>
-</div>
+<div class="pagination">
+<%= will_paginate @users, class: "digg_pagination"%>
+</div></div>
 </div>

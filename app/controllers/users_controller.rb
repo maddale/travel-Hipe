@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   
-  before_action :sign_in_user, only: [:show, :edit, :update, :index]
+  before_action :sign_in_user, only: [:show, :edit, :update, :index, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :admin_user, only: [:destroy] 
-  
+  before_action :selfkill_admin, only: [:destroy]
+
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
 
@@ -14,6 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page], per_page: 4)
   end
 
   def create
@@ -56,7 +59,7 @@ class UsersController < ApplicationController
     end
     
     def sign_in_user
-      unless singed_in?  
+      unless signed_in?  
         session[:prev_path] = request.url if request.get?
         flash[:notice] = "Plese, Sign in"
         redirect_to '/signin'
@@ -65,12 +68,30 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-      unless user_admin?
+      @user = User.find(params[:id])
+      unless user_admin? || current_user?(@user)
       flash[:error] = "Only Admin may remove users"
       redirect_to root_path
       end
     end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    unless current_user?(@user)
+    flash[:error] = "You can not modify another user"
+    redirect_to root_path
+    end
+  end
+  
+  def selfkill_admin
+    if user_admin?
+    @user = User.find(params[:id])
+    unless !current_user?(@user)
+    flash[:notice] = "Don't kill yourself!"
+    redirect_to request.referer
+    end
+  end
+  end
 
-    
 
 end

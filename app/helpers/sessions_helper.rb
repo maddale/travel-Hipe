@@ -16,7 +16,11 @@ module SessionsHelper
       @current_user ||= User.find_by(remember_token: remember_token)
   end
 
-  def singed_in?
+  def current_user?(user)
+    current_user == user
+  end
+
+  def signed_in?
     !current_user.nil?
   end
 
@@ -30,9 +34,9 @@ module SessionsHelper
     current_user.admin  
   end
 
-  def right_way(user)
-    session[:prev_path] || user_path(user)
-  end
+  def right_way
+    session[:prev_path] || root_path
+    end
   def clear_session
     session[:prev_path] = nil
   end

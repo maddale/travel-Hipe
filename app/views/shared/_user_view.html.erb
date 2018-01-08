@@ -1,0 +1,5 @@
+<section>
+	<%= gravatar_for(current_user, 140) %>
+	<h3><%= current_user.name %></h3>
+	<p><%= pluralize(current_user.microposts.count, "Post") %></p>
+</section>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         flash[:success] = "Welcome back, #{user.name}!!!"
         sign_in user
         
-        redirect_to right_way(user)
+        redirect_to right_way
         clear_session
         
       else

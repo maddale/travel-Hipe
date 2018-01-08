@@ -1,8 +1,9 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   
-  validates :name, presence: true, length: { maximum: 15, minimum: 2 }
+  validates :name, presence: true, length: { maximum: 60, minimum: 2 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensivity: false }
   has_secure_password
@@ -18,6 +19,13 @@ end
 def User.encrypt(token)
   Digest::SHA1.hexdigest(token.to_s)
 end
+
+
+def feed
+  microposts.where("user_id = ?", id)
+  
+end
+
 
 private
 

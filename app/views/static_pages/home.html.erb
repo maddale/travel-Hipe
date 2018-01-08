@@ -1,5 +1,26 @@
 <% provide(:title, 'Home') %>
 
+<% if signed_in? %>
+
+<div class="row">
+ 	<aside class="span4">
+    	<%= render 'shared/user_view' %>
+  		<%= render 'shared/micropost_form' %>
+	</aside>
+
+	
+	<aside class="span8">
+	<% if @feed_items.any? %>
+	<%= render 'shared/feed' %>
+	<% else %>
+	<h2>no resent posts... yet...</h2>
+	<% end %>
+	</aside>
+	
+
+</div>
+
+<% else %>
 <div class="center hero-unit">
   <h1>Welcome to TravelHipe!</h1>
   <h2>Don't make your self wait!</h2>
@@ -7,3 +28,5 @@
   <p>Just take a seat and feel like at home)))</p>
 </div>
 <%= link_to image_tag("Ruby_on_Rails-logo.png", alt: "Rails", width: "64px"), 'http://rubyonrails.org' %>
+
+<% end %>

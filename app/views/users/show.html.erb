@@ -1,13 +1,18 @@
-
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for(@user, 100) %>
-        <%= @user.name %>
-        <h2><%= @user.email %></h2>
-        
-      </h1>
-     </section>
-  </aside>
+ 	
+ 	<aside class="span5">
+    	<%= render 'shared/user_view' %>
+	</aside>
+	<% if @user.microposts.any? %>
+	<aside class="span7">
+	<h3>Microposts (<%= @user.microposts.count %>)</h3>
+		
+		<ol class="microposts">
+		<%= render @microposts %>
+		<%= will_paginate @microposts, class: "digg_pagination" %>
+		</ol>
+	</aside>
+	<% end %>
+
+</div>
 </div>
