@@ -17,6 +17,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page], per_page: 4)
+    @post = @user.posts.build
+    @posts = @user.posts.order(created_at: :desc)
+    @categories = @user.categories.uniq 
   end
 
   def create
@@ -51,6 +54,22 @@ class UsersController < ApplicationController
     flash[:success] = "User #{@user.name} successfully removed from db."
     redirect_to users_path
   end
+
+  def following
+    @title = "Follows"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page], per_page: 4)
+    render 'following'
+  end
+
+  def followers
+    @title = "Followed"
+    @user = User.find(params[:id])
+    @users =@user.followers.paginate(page: params[:page], per_page: 4)    
+    render 'following'
+  end
+
+
 
   private
    

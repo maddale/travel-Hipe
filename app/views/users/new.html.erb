@@ -1,10 +1,14 @@
-<h1>Sign UP</h1>
-<div class="row">
-<div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'user_form', f: f %>
-    <br>
-      <%= f.submit "Create Account",  class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+
+<div class="in-up-form">
+  <h1><strong>Sign UP</strong></h1>
+  <%= form_for(@user) do |f|  %>
+    <%= render 'user_form', f: f %>
+     
+     <div class="form-group">
+     
+     <%= f.submit "Create Account",  class: "btn btn-large btn-success" %>
+       
+     </div>
+  <% end %>
 </div>
+  

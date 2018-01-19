@@ -3,30 +3,21 @@
 <% if signed_in? %>
 
 <div class="row">
- 	<aside class="span4">
-    	<%= render 'shared/user_view' %>
-  		<%= render 'shared/micropost_form' %>
-	</aside>
+  
+  <div class="col-9 d-flex wrap pl-0 pr-0">
+    <%= render partial: "shared/post_index", collection: @posts, as: "post" %>
+  </div>
+  
+  <div class="col-3">
+    <%= render "shared/tag_cloud" %>
+  </div>
+</div><!--/row-->
 
-	
-	<aside class="span8">
-	<% if @feed_items.any? %>
-	<%= render 'shared/feed' %>
-	<% else %>
-	<h2>no resent posts... yet...</h2>
-	<% end %>
-	</aside>
-	
-
-</div>
 
 <% else %>
-<div class="center hero-unit">
-  <h1>Welcome to TravelHipe!</h1>
-  <h2>Don't make your self wait!</h2>
-  <%= link_to "Sign UP now", signup_path, class: "btn btn-large btn-primary bot-pad" %>
-  <p>Just take a seat and feel like at home)))</p>
-</div>
-<%= link_to image_tag("Ruby_on_Rails-logo.png", alt: "Rails", width: "64px"), 'http://rubyonrails.org' %>
-
+  <div class="sample">
+    <h1>Find out how to travel<br>with</h1>
+    <h1 class="display-3">Travel HIPE</h1>
+    <%= link_to "Sign UP", signup_path, class: "btn btn-large btn-outline-light" %>
+  </div>
 <% end %>

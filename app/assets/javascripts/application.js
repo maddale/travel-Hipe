@@ -10,8 +10,50 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require bootstrap
 //= require rails-ujs
-//= require turbolinks
-//= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+function getCookie(name) {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+
+function block_swich(block1, block2, disp) {
+
+if (getCookie("first1") != "" && getCookie("first2") != "") {
+  var old_block1 = getCookie("first1");
+   var old_block2 = getCookie("first2"); 
+
+    if (old_block1 != block1 && old_block2 != block2) {
+    document.getElementById(old_block1).style.display = disp;  
+    document.getElementById(old_block2).style.display = 'none';  
+    }
+}
+
+
+  if (document.getElementById(block1).style.display == disp || document.getElementById(block1).style.display == "") {
+    
+    document.cookie = "first1=" + block1;
+    document.cookie = "first2=" + block2;
+
+    document.getElementById(block1).style.display = 'none';
+    document.getElementById(block2).style.display = disp;
+    
+  } else {
+    document.getElementById(block1).style.display = disp;
+    document.getElementById(block2).style.display = 'none';  
+
+    document.cookie = "first1="//clean the cookie
+    document.cookie = "first2="//clean the cookie
+
+
+  }
+
+
+
+}

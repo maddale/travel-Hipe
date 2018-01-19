@@ -5,12 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'bootstrap-sass', '2.3.2.0'
-#gem 'bootstrap', '~> 4.0.0.beta3'
+#gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'faker', '1.1.2'
+gem 'carrierwave', '~> 1.0'
+
 
 #gem 'bootstrap', '~> 4.0.0.beta2.1'
 

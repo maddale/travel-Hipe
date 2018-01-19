@@ -1,5 +1,6 @@
 <h3>Microposts feed</h3>
 	<ul class="microposts">
-	<%= will_paginate @feed_items %>
 	<%= render partial: 'shared/feed_item', collection: @feed_items %>
-	</ul>
+<%= will_paginate @feed_items %>
+  	
+  </ul>

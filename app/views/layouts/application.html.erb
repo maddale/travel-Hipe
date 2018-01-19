@@ -9,19 +9,48 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
-  <%= render 'layouts/header' %>
-    <div class="container">
-            
+    <%= render 'layouts/nav_bar' %>
+    
+    <% if !signed_in? %>
+      
+      <header class="header">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <footer class="footer"><%= render 'layouts/footer' %></footer> 
+
+    <% else %>
+      <div class="container main">
+
+      <div class="row mt-3">
+        <div class="col">
         <% flash.each do |key, value| %>
           <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-        <% end %>
-      <%= yield %>
-          <%= render 'layouts/footer' %>
-          
-    </div>
+        <% end %>  
+        </div>
+      </div>
+        
+           
+        <%= yield %>
+         
+        <footer class="footer-signed-in">
+        <%= render 'layouts/footer' %>
+        </footer> <!-- /.row/footer -->
+      </div><!-- /.container -->
+    <% end %>
+   
+ 
+
+
   </body>
 </html>
- 

@@ -1,13 +1,15 @@
 class SessionsController < ApplicationController
 # include SessionsHelper
+  
   def new
   end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     
+    
     if !user 
-      flash.now[:error] = "User's mail #{params[:session][:email]} hasn't been found ((("
+      flash.now[:danger] = "User's mail #{params[:session][:email]} hasn't been found ((("
       render 'new'    
     else
       if user.authenticate(params[:session][:password])
@@ -18,7 +20,7 @@ class SessionsController < ApplicationController
         clear_session
         
       else
-        flash.now[:error] = "Wrong password"
+        flash.now[:danger] = "Wrong password"
         render 'new'
       end
     end

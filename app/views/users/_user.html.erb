@@ -1,11 +1,11 @@
 
 
 <li>
-	<%= gravatar_for(user, 82) %>
+	<%= link_to gravatar_for(user, 82), user_path(user) %>
 	<strong><%= link_to user.name, user_path(user) %></strong><br>
 	<small><%= user.email %></small>
 	<br>
-		<small><small><em>Signed in: <%= user.created_at %></em></small>
+		<small><small><em>Signed Up since: <%= user.created_at %></em></small>
 			<br>
 			<%= link_to "View", user_path(user) %> 
 				<% if user_admin? || current_user == user %>

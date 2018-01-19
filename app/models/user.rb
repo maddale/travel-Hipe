@@ -1,5 +1,17 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed   
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :posts, dependent: :destroy
+  has_many :categories, through: :posts
+
+  has_many :outboxes, foreign_key: "sender_id", class_name: "Message"
+  has_many :inboxes, foreign_key: "respondent_id", class_name: "Message"
+  has_many :messages, foreign_key: "user_id"
+
+
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   
@@ -20,20 +32,25 @@ def User.encrypt(token)
   Digest::SHA1.hexdigest(token.to_s)
 end
 
-
 def feed
   microposts.where("user_id = ?", id)
-  
+end
+
+def following?(other_user)
+  relationships.find_by(followed_id: other_user.id)
+end
+
+def follow!(other_user)
+  relationships.create!(followed_id: other_user.id)  
+end
+
+def unfollow!(other_user)
+  relationships.find_by(followed_id: other_user.id).destroy!
 end
 
 
 private
-
   def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
   end
-
-
-
- 
 end
