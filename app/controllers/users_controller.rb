@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_action :sign_in_user, only: [:show, :edit, :update, :index, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy, :edit_avatar, :resize_avatar, :update_avatar ]
   before_action :admin_user, only: [:destroy] 
   before_action :selfkill_admin, only: [:destroy]
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page], per_page: 4)
+    # @microposts = @user.microposts.paginate(page: params[:page], per_page: 4)
     @post = @user.posts.build
     @posts = @user.posts.order(created_at: :desc)
     @categories = @user.categories.uniq 
@@ -69,12 +69,47 @@ class UsersController < ApplicationController
     render 'following'
   end
 
+  def edit_avatar
+    @post = @user.posts.build
+    @posts = @user.posts.order(created_at: :desc)
+    @categories = @user.categories.uniq
+    render 'show'
+  end
+
+  def resize_avatar
+    @user = current_user
+
+    @user.crop_x = params[:user][:crop_x]
+    @user.crop_y = params[:user][:crop_y]
+    @user.crop_w = params[:user][:crop_w]
+    @user.crop_h = params[:user][:crop_h]
+
+   @user.avatar.recreate_versions!
+
+redirect_to user_path(current_user)
+   
+  end
+
+  def update_avatar
+    
+    @post = @user.posts.build
+    @posts = @user.posts.order(created_at: :desc)
+    @categories = @user.categories.uniq
+   
+   if params[:user].present?
+      @user.update_attribute(:avatar, params[:user][:avatar])
+      render 'show'
+   else
+    flash[:danger] = "You have to select a file."
+    redirect_to user_path(current_user)
+   end
+   end
 
 
   private
    
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :avatar_back)
     end
     
     def sign_in_user

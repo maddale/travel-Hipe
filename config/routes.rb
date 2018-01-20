@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 resources :tags, only: [:show, :index] 
 resources :users do
   resources :messages, only: [:new, :create, :show, :index, :destroy]
-  resources :categories 
+  resources :categories, only: [:index, :show]
   resources :posts  
   
     member do
@@ -38,7 +38,9 @@ match '/signin', to: "sessions#new", via: 'get'
 match '/signout', to: "sessions#destroy", via: 'delete' 
 
 get 'users/:user_id/messages/dialogue/:opponent_id', to: "messages#index", as: :after_delete
-
+get 'users/:id/edit_avatar', to: "users#edit_avatar", as: :user_edit_avatar
+patch 'users/:id/update_avatar', to: "users#update_avatar"
+patch 'users/:id/resize_avatar', to: "users#resize_avatar"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

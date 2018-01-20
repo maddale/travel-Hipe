@@ -3,16 +3,61 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.avatar {
-      
-  width: 75%;
+.avatar-plate {
+  
 
-  margin-top: -50%;
-  margin-bottom: 20px;
+  margin: -82.5px 0 20px 0;
   
   border: 3px solid white;
   border-radius: 100%;
   box-shadow: 0 0 7px rgba(0,0,0,0.4);
+  display: inline-flex;
+  overflow: hidden;
+  position: relative;
+
+
+}
+
+.new-ava {
+    position: absolute;
+    background-color: #80808000;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a, a:hover {
+      text-decoration: none;
+      color: black;
+      padding: 40px;
+    }
+    i {
+      font-size: 50px;
+    filter: alpha(Opacity=0);
+    opacity: 0; 
+        margin-top: 5px;
+
+    }
+}
+
+.new-ava:hover {
+    cursor: pointer;
+    background-color: #80808080;
+    i {
+    filter: alpha(Opacity=40);
+    opacity: 0.4; 
+        margin-top: 5px;
+    }
+    a, a:hover {
+      text-decoration: none;
+      color: black;
+      padding: 40px;
+    }
+}
+
+.avatar {
+      
+  max-height: 120px;
 }
 
 .avatar-post {

@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require jquery.Jcrop 
  *= require_tree 
  *= require_self
  */
@@ -31,3 +32,53 @@ body {
   order: 2;
 }
 
+.popup-back{
+  z-index: 1000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popup-plate {
+  z-index: 1001;
+  margin: 100px auto 20px auto;
+  background-color: white;
+  border-radius: 4px;
+  width: 50%;
+  // height: 300px;
+}
+
+
+.popup-content {
+  padding: 20px;
+  position: relative;
+  .img-resize {
+        display: flex;
+    justify-content: center;
+  }
+    .material-icons {
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+    .foo{
+      max-width: 100%;
+    }
+    img {
+    //border: 1px solid gray;
+  }
+}
+
+.material-icons {
+  a {
+    color: gray;
+  }
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
+}  

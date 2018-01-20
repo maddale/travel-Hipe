@@ -12,6 +12,8 @@ gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'faker', '1.1.2'
 gem 'carrierwave', '~> 1.0'
+# gem 'mini_magick'
+gem 'rmagick'
 
 
 #gem 'bootstrap', '~> 4.0.0.beta2.1'

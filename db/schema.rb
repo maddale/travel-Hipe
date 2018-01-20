@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118111144) do
+ActiveRecord::Schema.define(version: 20180119132606) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 20180118111144) do
     t.string "password_digest"
     t.string "remember_token"
     t.boolean "admin", default: false
+    t.string "avatar"
+    t.string "avatar_back"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end

@@ -13,6 +13,12 @@
   </head>
 
   <body>
+<!--pop-ups-->
+
+        <%= yield :popup %>
+
+  
+<!--/pop-ups-->
     <%= render 'layouts/nav_bar' %>
     
     <% if !signed_in? %>

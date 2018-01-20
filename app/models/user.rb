@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar_back, ImageUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  
+
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed   

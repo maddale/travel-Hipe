@@ -1,3 +1,12 @@
+<% if params[:action] == "edit_avatar" %>
+  <%= render "edit_avatar" %>
+<% end %>
+
+<% if params[:action] == "update_avatar" %>
+  <%= render "resize_avatar" %>
+<% end %>
+
+
 <div class="row">
 <%= render 'shared/user_side' %>
     
@@ -5,6 +14,7 @@
 
   	
   <div class="col-7">
+    
     <div id="accordion" role="tablist">
       <div class="card">
         <div class="card-header" role="tab" id="headingOne">

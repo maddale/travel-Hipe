@@ -12,8 +12,11 @@
 //
 //= require rails-ujs
 //= require jquery3
+//= require jquery.Jcrop
 //= require popper
 //= require bootstrap-sprockets
+//= require_tree . 
+
 
 function getCookie(name) {
   var matches = document.cookie.match(new RegExp(
@@ -53,7 +56,17 @@ if (getCookie("first1") != "" && getCookie("first2") != "") {
 
 
   }
-
-
-
 }
+
+
+
+    //Функция отображения PopUp
+    function PopUpShow(){
+        $("#popup1").show();
+    }
+    //Функция скрытия PopUp
+    function PopUpHide(){
+        $("#popup1").hide();
+    }
+
+
