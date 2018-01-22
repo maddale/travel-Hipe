@@ -15,6 +15,8 @@ gem 'carrierwave', '~> 1.0'
 # gem 'mini_magick'
 gem 'rmagick'
 
+gem 'execjs'
+gem 'therubyracer'
 
 #gem 'bootstrap', '~> 4.0.0.beta2.1'
 

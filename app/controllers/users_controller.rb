@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     # @microposts = @user.microposts.paginate(page: params[:page], per_page: 4)
     @post = @user.posts.build
     @posts = @user.posts.order(created_at: :desc)
+    @photos = @user.photos.order(created_at: :desc)
     @categories = @user.categories.uniq 
   end
 
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
   def edit_avatar
     @post = @user.posts.build
     @posts = @user.posts.order(created_at: :desc)
+    @photos = @user.photos.order(created_at: :desc)
     @categories = @user.categories.uniq
     render 'show'
   end
@@ -94,6 +96,7 @@ redirect_to user_path(current_user)
     
     @post = @user.posts.build
     @posts = @user.posts.order(created_at: :desc)
+    @photos = @user.photos.order(created_at: :desc)
     @categories = @user.categories.uniq
    
    if params[:user].present?

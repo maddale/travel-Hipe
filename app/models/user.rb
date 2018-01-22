@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :posts, dependent: :destroy
   has_many :categories, through: :posts
+  has_many :photos, dependent: :destroy
 
   has_many :outboxes, foreign_key: "sender_id", class_name: "Message"
   has_many :inboxes, foreign_key: "respondent_id", class_name: "Message"
@@ -28,6 +29,10 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
 
 
+def avatar_link(img_format)
+  return self.avatar.url(img_format) || "/assets/" + img_format.to_s + "_default_user.png"
+  
+end
 
 def User.new_remember_token
   SecureRandom.urlsafe_base64
@@ -51,6 +56,12 @@ end
 
 def unfollow!(other_user)
   relationships.find_by(followed_id: other_user.id).destroy!
+end
+
+def cr_message(respondent_id, body)
+  self.outboxes.create(respondent_id: respondent_id, body: body, user_id: self.id)
+  self.outboxes.create(respondent_id: respondent_id, body: body, user_id: respondent_id)
+  
 end
 
 
