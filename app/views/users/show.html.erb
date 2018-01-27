@@ -1,19 +1,4 @@
-<% if params[:action] == "edit_avatar" %>
-  <%= render "edit_avatar" %>
-<% end %>
-
-<% if params[:action] == "update_avatar" %>
-  <%= render "resize_avatar" %>
-<% end %>
-
-
-<div class="row">
-<%= render 'shared/user_side' %>
-    
-  
-
-  	
-  <div class="col-7">
+ 	
     
     <div id="accordion" role="tablist">
       <div class="card">
@@ -26,7 +11,7 @@
     <div id="collapseOne" class="collapse<%= " show" if @post.errors.any? %>" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         <div class="post-form">
- <%= form_for [current_user, @post] do |f| %>
+<%= form_for [current_user, @post] do |f| %>
                 <%= render 'shared/forms_errors', object: @post %>        
               <div class="form-group">
                 <%= f.label :title %>
@@ -38,7 +23,7 @@
               </div>
                 
                 <%= f.submit 'New post', class: "btn btn-large btn-success"  %>
-                <% end %>
+<% end %>
 
 
 
@@ -49,14 +34,5 @@
     </div>
 
     <%= render @posts %>
- </div><!--/col7-->
  
     
-<div class="col-2">
-  <div class="list-group">
-  <% @categories.each do |category| %>
-  <%= link_to category.name, user_category_path(current_user, category), class: "list-group-item list-group-item-action" %>
-  <% end %>
-</div>
-</div>
-</div><!--/row-->

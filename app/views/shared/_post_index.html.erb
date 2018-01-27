@@ -1,0 +1,21 @@
+
+<div class="index-post">
+  <div class="show-content" id="show-content-<%= post.id %>" >
+      <div class="post-head">
+        
+        <%= render partial: 'shared/tags', object: post, as: "post" %>   
+
+         <%= post.post_img? ? image_tag(post.post_img.url)  : image_tag("/assets/post_head.jpg") %>
+      </div>
+                
+        
+       
+       <div class="post-body">
+       <i><p><small>created <%= post.created_at.strftime("%d-%B-%Y") %></small> by <strong><%= post.user.name %></strong></p></i>
+       <h4><strong><%= post.title %></strong></h4>
+        <p class="mb-0"><%= truncate(post.body, length: 240, separatopr: ' ') %></p>
+        <center><%= link_to 'read more', user_post_path(post.user.id, post), class: "text-secondary" %></center>  
+       </div>
+       
+    </div> <!-- /show-content -->
+  </div>

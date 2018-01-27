@@ -1,0 +1,17 @@
+  
+          <div class="img-resize">
+            <%= image_tag @user.avatar_url(:large), id: "cropbox" %>
+          </div>
+
+    <%= form_for @user, url: {action: "resize_avatar"} do |f| %>
+      <% %w[x y w h].each do |attribute| %>
+        <%= f.hidden_field "crop_#{attribute}" %>
+      <% end %>
+      <div class="text-center mt-3">
+        <%= f.submit 'Done', class: "btn btn-success", id: "avatar-send" %>
+      </div>
+      <% end %>
+  
+
+
+  

@@ -1,0 +1,18 @@
+I"'(function() {
+  $(function() {
+    return $('.yeah').on("ajax:success", function(event) {
+      if (Boolean($('#collapse81')[0].getAttribute('data-cheked'))) {
+        $('#collapse81').append(event.detail[2].response);
+        $('#collapse81')[0].setAttribute('data-cheked', '');
+        $('#counter81').fadeOut(300);
+        return $('#counter81').detach();
+      } else {
+        $('#talk81').fadeOut(300);
+        $('#talk81').detach();
+        return $('#collapse81')[0].setAttribute('data-cheked', 'ready');
+      }
+    });
+  });
+
+}).call(this);
+:ET

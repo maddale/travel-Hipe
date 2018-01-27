@@ -1,0 +1,18 @@
+$('#popup-content-1').append('<%= j render 'avatar_edit_form' %>');
+$('#popup-1').fadeIn(100);
+
+function readURL(input){
+  if (input.files && input.files[0]) {
+    var fr = new FileReader();
+    fr.onload = function(e) {
+
+      $('.img-resize').empty().append('<img src="' + e.target.result + '">');
+      $('#sub').fadeIn(100);
+    }
+    fr.readAsDataURL(input.files[0]);
+  }
+}
+
+$('#user_avatar').change(function() {readURL(this);});
+
+// <image_tag("upload.png", class: "mb-3 foo", id: "preview") %>

@@ -1,0 +1,28 @@
+// Place all the styles related to the Photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gallery-head {
+  h5 {
+    margin: 0;
+  }
+  span {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
+    position: relative;
+    padding: 10px 20px 0 20px;
+}
+
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 20px;
+  
+  img {
+    margin-bottom: 10px;
+  }
+}

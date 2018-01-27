@@ -1,0 +1,5 @@
+<p><%= params %></p>
+<p><%= params[:photo][:picture] %></p>
+<% params[:photo][:picture].each do |p| %>
+<p><%= p %></p>
+<% end %>

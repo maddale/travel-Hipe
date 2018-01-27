@@ -1,0 +1,9 @@
+I"ë(function() {
+  $(function() {
+    return $('#testlink').on('ajax:success', function(e) {
+      return $('#info').append('<div class="card-body" id="talk81">blblblblblblblblbaabalbalbalbabalblabl</div>');
+    });
+  });
+
+}).call(this);
+:ET

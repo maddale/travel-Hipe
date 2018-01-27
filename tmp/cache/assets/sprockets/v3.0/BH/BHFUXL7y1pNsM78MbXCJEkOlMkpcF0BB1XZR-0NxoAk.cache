@@ -1,0 +1,16 @@
+I"O(function() {
+  $(function() {
+    return $('.yeah').on('ajax:success', function(e, data, status, xhr) {
+      return console.log(xhr);
+    });
+  });
+
+  $('.yeah').on('ajax.error', function(e, xhr, status, error) {
+    console.log(error);
+    console.log(e);
+    console.log(status);
+    return console.log(xhr);
+  });
+
+}).call(this);
+:ET

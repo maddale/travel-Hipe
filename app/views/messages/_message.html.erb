@@ -1,0 +1,39 @@
+
+        <% if message.user_id == current_user.id %>
+        
+        <% if message.respondent_id == @user.id %>
+        
+          <div class="row message-body<%= " unread" if !message.read %> talk-with-<%= @opponent.id %>" id="message-<%= message.id %>" >
+            <div class="col-1">
+              <%= image_tag(sender(message).avatar_link("icon"), class: "icon") %></div>
+            <div class="col-10"><p class="message-title"><strong><%= sender(message).name %> </strong><span class="timestamp"><%= message.updated_at.strftime("%d-%m-%Y at %H:%m") %></span></p>
+              <p class="message-text"><%= message.body %></p>
+            </div>
+            <div class="col-1">
+              <%= link_to "close", user_message_path(@user, message.id), remote: true, method: :delete, class: "material-icons delete-message", id: "#{message.id}" %>
+            </div>
+          </div>
+
+      <% else %>
+
+          <div class="row message-body<%= " unread" if !message.read %> talk-with-<%= @opponent.id %>" id="message-<%= message.id %>" >
+            
+            
+            
+            <div class="col-10 text-right pr-0"><p class="message-title"><span class="timestamp"><%= message.updated_at.strftime("%d-%m-%Y at %H:%m") %></span> <strong><%= sender(message).name %></strong></p>
+              <p class="message-text"><%= message.body %></p>
+            </div>
+            
+            <div class="col-1">
+              <%= image_tag(sender(message).avatar_link("icon"), class: "icon") %>
+            </div>
+
+            <div class="col-1">
+              <%= link_to "close", user_message_path(@user, message.id), remote: true, method: :delete, class: "material-icons delete-message", id: "#{message.id}" %>
+            </div>
+          
+          </div>
+      
+      <% end %>
+      <% end %>
+      

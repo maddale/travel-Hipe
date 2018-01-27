@@ -1,0 +1,54 @@
+
+<div class="row mesage-index">
+<%= render 'shared/user_side' %>
+
+  <div class="col-6">
+
+<% @users.each do |user| %>  
+  <% if user != current_user %>
+  <div class="card message-head">
+      <div class="card-header" role="tab" id="heading<%= user.id %>">
+        <h5 class="mb-0"><a data-toggle="collapse" href="#collapse<%= user.id %>" role="button" aria-expanded="true" aria-controls="collapse<%= user.id %>"><%= user.name %></a></h5>
+      </div>
+
+    <div id="collapse<%= user.id %>" class="collapse <%= "show" if user.id == @opponent.to_i %>" role="tabpanel" aria-labelledby="heading<%= user.id %>" data-parent="#accordion">
+      <div class="card-body pb-0">
+
+      <% talking(current_user, user).each do |message| %>
+        <% if message.user_id == current_user.id %>
+        
+          <div class="row message-body">
+            <div class="col-1">
+              <%= gravatar_for(sender(message), 30) %></div>
+            <div class="col-10"><p class="message-title"><strong><%= sender(message).name %> </strong><span class="font-italic"><%= message.updated_at.strftime("%d %m %Y at %H:%m") %></span></p>
+              <p class="message-text"><%= message.body %></p>
+            </div>
+            <div class="col-1">
+              <small><%= link_to "close", user_message_path(user, message), method: :delete, class: "material-icons" %></small>
+            </div>
+          </div>
+      
+      <% end %>
+      <% end %>
+      
+      
+    </div><!--/card-body-->
+  
+  <div class="row ml-0 mr-0 message-respond-form">
+            <div class="col-12">
+        
+          <%= form_for [current_user, @message] do |f| %>
+            <%= f.hidden_field :sender_id %>
+            <%= f.hidden_field :respondent_id, value: user.id  %>
+            <%= f.text_field :body, placeholder: "Answer to #{user.name}", :autofocus => true, class: "chat-field" %>
+            <%= f.submit "Reply", class: "btn btn-success message-submit" %>
+          <% end %>
+        </div>
+      </div>
+
+  </div><!--/collapse-->
+</div><!--/card-->
+      <% end %>
+    <% end %>
+  </div>
+</div>

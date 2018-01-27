@@ -1,0 +1,7 @@
+I"‰(function() {
+  $(function() {
+    return $('#easyuploader').easyUploader("/users/81/photos", 'photo[picture][]');
+  });
+
+}).call(this);
+:ET

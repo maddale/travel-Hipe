@@ -1,0 +1,7 @@
+$('.chat-field').val('')
+$('#collapse-<%= @opponent.id %>').append('<%= j render @message1 %>');
+$('#message-<%= @message1.id %>').hide()
+$('#message-<%= @message1.id %>').slideDown(300)
+$('#message-<%= @message1.id %>').removeClass('unread')
+
+

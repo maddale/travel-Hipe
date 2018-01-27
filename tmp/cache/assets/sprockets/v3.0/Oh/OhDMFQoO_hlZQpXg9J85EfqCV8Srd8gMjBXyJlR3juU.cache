@@ -1,0 +1,9 @@
+I"“(function() {
+  $(function() {
+    return $(document).on("ajax:success", function(e) {
+      return console.log = e;
+    });
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,8 @@
+<div class="tag-cloud card bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center"><h5>Tag cloud</h5></div>
+          <div class="card-body">
+            <% Tag.all.each do |tag| %>
+              <%= link_to tag.name, tag_path(tag), class: "tag-#{tag_size(tag.posts.count)} badge1 badge-pill badge-success" %> 
+          <% end %>
+          </div>
+</div>

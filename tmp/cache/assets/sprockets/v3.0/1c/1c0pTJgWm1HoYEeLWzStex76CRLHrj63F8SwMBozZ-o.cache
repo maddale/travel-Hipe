@@ -1,0 +1,9 @@
+I"—(function() {
+  $(function() {
+    return $('.card-header').click(function(event) {
+      return event.preventDefault();
+    });
+  });
+
+}).call(this);
+:ET

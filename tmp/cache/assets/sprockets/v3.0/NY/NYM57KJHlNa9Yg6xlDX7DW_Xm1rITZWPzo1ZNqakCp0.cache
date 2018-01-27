@@ -1,0 +1,11 @@
+I"½(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var id;
+      id = this.id;
+      return console.log(this.data - cheked);
+    });
+  });
+
+}).call(this);
+:ET

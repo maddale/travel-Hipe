@@ -1,0 +1,5 @@
+$('#collapse-<%= @opponent.id %>').append('<%= j render @messages %>');
+$('#collapse-<%= @opponent.id %>').hide()
+$('#collapse-<%= @opponent.id %>').slideDown(300)
+$('#collapse-<%= @opponent.id %>').scrollTop(600)
+$('#card-<%= @opponent.id %>').append('<%= j render 'message_respond_form' %>');

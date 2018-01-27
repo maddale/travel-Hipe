@@ -1,0 +1,26 @@
+
+<div class="post-medium">
+  <div class="show-content" id="show-content-<%= post.id %>" style="<%= 'display: none;' if post.id == @post.id %>" >
+    <div class="post-head">
+      
+       <%= render partial: 'shared/tags', object: post, as: "post" %>
+
+       <%= post.post_img? ? image_tag(post.post_img.url)  : image_tag("/assets/post_head.jpg") %>
+       <div class="img-footer">
+         <div class="img-footer-left"><h4><strong><%= post.title %></strong></h4></div>
+         <div class="img-footer-right"><i><p><small>created <%= post.created_at.strftime("%d-%B-%Y") %></small></p><p>by <strong><%= post.user.name %></strong></p></i></div>
+         </div>
+      </div> <!-- /imagefooter -->
+     
+     <div class="post-body">
+      <p class="mb-0"><%= truncate(post.body, length: 380, separatopr: ' ') %></p>
+      <center><%= link_to 'read more', user_post_path(post.user.id, post), class: "text-secondary" %></center>  
+     </div>
+     <%= link_to "Edit post", edit_user_post_path(current_user, post), class: "edit-post text-secondary" %>
+     
+  </div> 
+
+
+</div><!--/post-->
+
+  

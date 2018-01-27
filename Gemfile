@@ -14,6 +14,8 @@ gem 'faker', '1.1.2'
 gem 'carrierwave', '~> 1.0'
 # gem 'mini_magick'
 gem 'rmagick'
+gem 'multiuploader'
+
 
 gem 'execjs'
 gem 'therubyracer'

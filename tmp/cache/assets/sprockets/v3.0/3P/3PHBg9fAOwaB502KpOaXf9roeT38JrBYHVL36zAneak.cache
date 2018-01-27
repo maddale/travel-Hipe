@@ -1,0 +1,8 @@
+I"£(function() {
+  $('.yeah').on("ajax:success", function(e, data, status, xhr) {
+    console.log('jhdjshdjshj');
+    return console.log(data);
+  });
+
+}).call(this);
+:ET

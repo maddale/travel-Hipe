@@ -1,0 +1,23 @@
+I"n(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var currentId, id;
+      id = this.id;
+      currentId = this.getAttribute('data-current-user');
+      if (this.getAttribute('data-cheked')) {
+        $.ajax({
+          url: "/users/" + currentId + "/messages/" + id,
+          type: 'GET',
+          dataType: 'script'
+        });
+        return this.setAttribute('data-cheked', '');
+      } else {
+        $('.talk-with-' + id).fadeOut(300);
+        $('#respond-form-' + id).fadeOut(300);
+        return this.setAttribute('data-cheked', 'ready');
+      }
+    });
+  });
+
+}).call(this);
+:ET

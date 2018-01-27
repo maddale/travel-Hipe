@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= dynamic_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+<!--pop-ups-->
+    <%= render '/shared/popup' %>
+
+<!--navbar-->
+    <%= render 'layouts/nav_bar' %>
+<!--/navbar-->
+    
+    <div class="container main">
+
+<!--alerts-->
+      <%= render '/shared/alerts' %>
+<!--/alerts-->
+        
+      <div class="row">
+  <!--UserBar-->           
+          <div class="col-3">
+          <%= render '/shared/user_side' %>
+          </div>
+  <!--Content--> 
+          <div class="col-7">
+            <%= yield %>
+          </div>
+  <!--Right SideBar--> 
+          <div class="col-2">
+            <div class="list-group">
+            <% @categories.each do |category| %>
+            <%= link_to category.name, user_category_path(current_user, category), class: "list-group-item list-group-item-action" %>
+            <% end %>
+            </div>
+          </div>
+      </div><!--/Row-->
+         
+      <footer class="footer-signed-in">
+        <%= render 'layouts/footer' %>
+      </footer> <!-- /.row/footer -->
+    </div><!-- /.container -->
+  </body>
+</html>

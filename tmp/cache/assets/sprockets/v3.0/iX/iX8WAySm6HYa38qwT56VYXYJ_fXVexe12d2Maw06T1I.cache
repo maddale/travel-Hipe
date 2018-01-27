@@ -1,0 +1,26 @@
+I"ˆ(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var currentId, id;
+      id = this.id;
+      currentId = this.getAttribute('data-current-user');
+      console.log(currentId);
+      if (this.getAttribute('data-cheked')) {
+        $.ajax({
+          url: "/users/1/messages/talk/" + id,
+          type: 'GET',
+          data: {
+            opp_id: id
+          },
+          dataType: 'script'
+        });
+        return this.setAttribute('data-cheked', '');
+      } else {
+        $('.talk-with-' + id).fadeOut(300);
+        return this.setAttribute('data-cheked', 'ready');
+      }
+    });
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,9 @@
+I"‡(function() {
+  $(function() {
+    return $('#testlink').click()(function() {
+      return alert('jkl');
+    });
+  });
+
+}).call(this);
+:ET

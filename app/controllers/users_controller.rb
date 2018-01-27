@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  layout "user_with_right_side_bar", only: [:show]  
   before_action :sign_in_user, only: [:show, :edit, :update, :index, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :edit_avatar, :resize_avatar, :update_avatar ]
   before_action :admin_user, only: [:destroy] 
@@ -71,11 +71,9 @@ class UsersController < ApplicationController
   end
 
   def edit_avatar
-    @post = @user.posts.build
-    @posts = @user.posts.order(created_at: :desc)
-    @photos = @user.photos.order(created_at: :desc)
-    @categories = @user.categories.uniq
-    render 'show'
+    respond_to do |format|
+      format.js
+    end
   end
 
   def resize_avatar
@@ -93,19 +91,17 @@ redirect_to user_path(current_user)
   end
 
   def update_avatar
-    
-    @post = @user.posts.build
-    @posts = @user.posts.order(created_at: :desc)
-    @photos = @user.photos.order(created_at: :desc)
-    @categories = @user.categories.uniq
-   
+       
    if params[:user].present?
       @user.update_attribute(:avatar, params[:user][:avatar])
-      render 'show'
+      respond_to do |format|
+        format.js
+      end
    else
     flash[:danger] = "You have to select a file."
     redirect_to user_path(current_user)
    end
+
    end
 
 

@@ -1,0 +1,33 @@
+<%= provide :title, @title %>
+<div class="row">
+ 	
+ 	<aside class="span5">
+    	<%= render 'shared/user_view' %>
+		<%= render 'shared/stats' %>
+	
+<% if @users.any? %>
+
+<% end %>
+
+
+	</aside>
+
+	
+
+	<% if @users.any? %>
+	
+	<div class="span7">
+	<h3><%= @title %> <%= pluralize(@users.count, "user") %></h3>
+		
+		<ul class="users">
+		<%= render @users %>
+		<%= will_paginate @users, class: "digg_pagination" %>
+		</ul>
+	</div>
+
+
+
+	<% end %>
+
+</div>
+</div>

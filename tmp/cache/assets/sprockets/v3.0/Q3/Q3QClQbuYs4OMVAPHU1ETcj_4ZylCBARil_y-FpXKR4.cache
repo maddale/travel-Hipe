@@ -1,0 +1,12 @@
+I"ç(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var id;
+      id = this.id;
+      console.log('.talk-with-' + id);
+      return $('.talk-with-' + id).fadeOut(300);
+    });
+  });
+
+}).call(this);
+:ET

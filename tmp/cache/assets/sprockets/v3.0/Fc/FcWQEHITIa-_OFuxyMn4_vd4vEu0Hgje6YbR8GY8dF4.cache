@@ -1,0 +1,11 @@
+I"ß(function() {
+  $(function() {
+    return $(document).on("ajax:success", function(event) {
+      var et;
+      et = event.target;
+      return alert('ajax is success, event  target is ' + et);
+    });
+  });
+
+}).call(this);
+:ET

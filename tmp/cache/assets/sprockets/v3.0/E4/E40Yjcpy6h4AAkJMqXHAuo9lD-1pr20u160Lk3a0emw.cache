@@ -1,0 +1,9 @@
+I"œ(function() {
+  $(function() {
+    return $(document).on("ajax:success", function(e) {
+      return console.log(e.target.id);
+    });
+  });
+
+}).call(this);
+:ET

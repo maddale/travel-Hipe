@@ -1,0 +1,13 @@
+          
+          <div class="img-resize">
+          <strong><h3>Choose the image file</h3></strong>
+          </div>
+          <%= form_for @user, url: {action: "update_avatar"}, multipart: true, remote: true do |f| %>
+          
+          <div class="mb-3">
+          <%= f.file_field :avatar %><br>
+          </div>
+           <div class="sub-div">
+          <%= f.submit "Crop and Resize", class: "btn btn-success dn", id: "sub" %>
+          <% end %>
+           </div>

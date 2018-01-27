@@ -1,0 +1,14 @@
+I")(function() {
+  $(function() {
+    var b;
+    b = $('#collapse81').getAttribute('data-chekked');
+    alert(b);
+    return $('.yeah').on("ajax:success", function(event) {
+      return $('#collapse81').append(event.detail[2].response);
+    });
+  });
+
+  getAttribute('data-chekked');
+
+}).call(this);
+:ET

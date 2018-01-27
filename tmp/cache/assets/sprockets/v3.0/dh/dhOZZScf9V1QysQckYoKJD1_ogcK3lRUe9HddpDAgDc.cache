@@ -1,0 +1,9 @@
+I"‰(function() {
+  $(function() {
+    return $('.message-head').click(function() {
+      return alert('hjk');
+    });
+  });
+
+}).call(this);
+:ET

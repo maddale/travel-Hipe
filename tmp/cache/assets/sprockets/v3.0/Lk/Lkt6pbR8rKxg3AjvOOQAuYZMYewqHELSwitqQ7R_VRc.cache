@@ -1,0 +1,9 @@
+I"}(function() {
+  $(function() {
+    return $('#testlink').onclick(function(event) {});
+  });
+
+  alert('www');
+
+}).call(this);
+:ET

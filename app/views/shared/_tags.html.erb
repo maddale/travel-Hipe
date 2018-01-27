@@ -1,0 +1,5 @@
+<div class="tags">
+        <% post.tags.each do |tag| %>
+          <%= link_to "#"+tag.name, tag_path(tag), class: "badge badge-pill badge-light" %>
+        <% end %>
+</div>

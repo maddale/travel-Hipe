@@ -1,0 +1,16 @@
+
+<div class="row">
+  <div class="col"><button type="button" class="btn btn-warning btn-tag">#<%= @tag.name %> <span class="badge badge-light"><%= @tag.posts.count %></span></button>
+  </div>
+</div>
+<div class="row">
+ 
+  <div class="col-9 d-flex wrap">
+    <%= render partial: "shared/post_index", collection: @posts, as: "post" %>
+  </div>
+
+  <div class="col-3" >
+    <%= render "shared/tag_cloud" %>
+  </div>
+
+</div>

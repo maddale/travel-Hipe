@@ -1,0 +1,21 @@
+$('#popup-content-1').empty();
+$('#popup-content-1').append('<%= j render 'avatar_resize_form' %>');
+jQuery(function($) {
+        
+        $('#cropbox').Jcrop({
+          aspectRatio: 1,
+          setSelect: [0, 0, 120, 120],
+          onSelect: function update(coords) {
+            $('#user_crop_x').val(coords.x);
+            $('#user_crop_y').val(coords.y);
+            $('#user_crop_w').val(coords.w);
+            $('#user_crop_h').val(coords.h);
+          },
+          onChange: function update(coords) {
+            $('#user_crop_x').val(coords.x);
+            $('#user_crop_y').val(coords.y);
+            $('#user_crop_w').val(coords.w);
+            $('#user_crop_h').val(coords.h);
+          }
+      });
+    });

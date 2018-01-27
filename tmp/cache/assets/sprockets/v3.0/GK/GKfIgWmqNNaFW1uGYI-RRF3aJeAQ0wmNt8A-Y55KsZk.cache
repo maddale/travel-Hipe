@@ -1,0 +1,32 @@
+I"(function() {
+  var AvatarCropper,
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  $('#avatar-send').on('ajax:success', function(event) {
+    return new AvatarCropper();
+  });
+
+  AvatarCropper = (function() {
+    function AvatarCropper() {
+      this.update = bind(this.update, this);
+      $('#cropbox').Jcrop({
+        aspectRatio: 1,
+        setSelect: [0, 0, 120, 120],
+        onSelect: this.update,
+        onChange: this.update
+      });
+    }
+
+    AvatarCropper.prototype.update = function(coords) {
+      $('#user_crop_x').val(coords.x);
+      $('#user_crop_y').val(coords.y);
+      $('#user_crop_w').val(coords.w);
+      return $('#user_crop_h').val(coords.h);
+    };
+
+    return AvatarCropper;
+
+  })();
+
+}).call(this);
+:ET

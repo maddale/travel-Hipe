@@ -1,0 +1,41 @@
+
+<div class="row mesage-index">
+<%= render 'shared/user_side' %>
+
+  <div class="col-6">
+
+<% @users.each do |user| %>  
+  <% if user != current_user %>
+  <div class="card message-head" id="card-<%= user.id %>">
+      <div class="card-header" role="tab" id="<%= user.id %>" data-cheked="ready" data-current-user="<%= current_user.id %>">
+        
+        <div class="row ai-center">
+          <div class="col-10">
+            <h5 class="mb-0">
+          <a data-toggle="collapse" href="#" role="button" aria-expanded="true" aria-controls="collapse<%= user.id %>" class="yeah"><%= user.name %></a>
+        </h5>
+          </div>
+          
+          <div class="col-2">
+            <p class="message-counter text-right"><span id="counter-<%= user.id %>"><%= @messages.where(sender_id: user.id).count %></span><span id="counter-new-<%= user.id %>"><strong><%= new_messages_count(@messages, user.id) %></strong></span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    <div id="collapse-<%= user.id %>" data-cheked="ready" class="collapse card-body" role="tabpanel" aria-labelledby="heading<%= user.id %>" data-parent="#accordion">
+      <!--/card-body-->
+      
+    </div><!--/collapse-->
+      
+
+
+  
+
+</div><!--/card-->
+
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 <% provide(:title, 'Help') %>
 <h1>This is a HELP - page</h1>
 <p>We will help You, anyway, anytime, anywhere!!!</p>
-
+<p><%= link_to 'some reference', "/users/1/posts/", remote: true, data: { type: :json }, id: "jepa" %>
+</p>
+<p><a href="/users/1/messages/talk/81" id="testlink" data-remote="true">testlink</a></p>
+<div id="info"></div>

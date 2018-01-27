@@ -1,0 +1,27 @@
+I"ß(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var currentId, id;
+      id = this.id;
+      currentId = this.getAttribute('data-current-user');
+      if (this.getAttribute('data-cheked')) {
+        $.ajax({
+          url: "/users/" + currentId + "/messages/" + id,
+          type: 'GET',
+          dataType: 'script'
+        });
+        return this.setAttribute('data-cheked', '');
+      } else {
+        $('#collapse-' + id).slideUp(300);
+        $('#message-respond-' + id).slideUp(300);
+        del(function() {
+          return $('.talk-with-' + id).detach();
+        });
+        delay(del, 600);
+        return this.setAttribute('data-cheked', 'ready');
+      }
+    });
+  });
+
+}).call(this);
+:ET

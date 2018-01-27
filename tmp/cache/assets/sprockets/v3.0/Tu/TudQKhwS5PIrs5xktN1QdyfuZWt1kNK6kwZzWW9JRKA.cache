@@ -1,0 +1,19 @@
+I"‹(function() {
+  $(function() {
+    return $('.card-header').click(function() {
+      var id;
+      id = this.id;
+      if (this.getAttribute('data-cheked')) {
+        $.ajax(function() {
+          return {
+            url: '/users/1/messages/talk/' + id,
+            type: 'GET'
+          };
+        });
+        return this.setAttribute('data-cheked', '');
+      }
+    });
+  });
+
+}).call(this);
+:ET

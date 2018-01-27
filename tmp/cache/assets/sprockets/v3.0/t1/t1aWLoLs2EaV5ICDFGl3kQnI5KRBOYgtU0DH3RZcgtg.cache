@@ -1,0 +1,97 @@
+I"¨(function() {
+  var EasyUploader, root,
+    hasProp = {}.hasOwnProperty;
+
+  root = typeof exports !== "undefined" && exports !== null ? exports : this;
+
+  EasyUploader = (function() {
+    function EasyUploader(element, url, name, options) {
+      var uploader;
+      options = $.extend({}, options, {
+        startHandler: (function(_this) {
+          return function(uid, file) {
+            var empty, fileDiv, filename;
+            if (!_this.currentRow || _this.currentRow.find('>div.file').length === 5) {
+              _this.currentRow = $('<div/>').addClass('file-row').appendTo(element);
+            }
+            (new Image()).src = "/assets/easyuploader/empty-1fcf597a154e19728cf248f994c9c6cd8bba62394891b9d6aac2cb380503e819.png";
+            (new Image()).src = "/assets/easyuploader/filled-73b726857809f2fc4d88ddba031c322321d5fae6fe3a14e6df5dd6a9ee325478.png";
+            fileDiv = $('<div/>').addClass('file').attr('id', "file_" + uid).appendTo(_this.currentRow);
+            empty = $('<div/>').addClass('empty').appendTo(fileDiv);
+            $('<div/>').addClass('filled').appendTo(empty);
+            return filename = $('<p/>').text(file.fileName).appendTo(fileDiv);
+          };
+        })(this),
+        progressHandler: (function(_this) {
+          return function(uid, phase, position, total) {
+            var amount;
+            if (phase === 'upload') {
+              amount = Math.round((position / total) * 44);
+              return $("#file_" + uid + " .filled").css('width', amount + "px");
+            }
+          };
+        })(this),
+        loadHandler: (function(_this) {
+          return function(uid, xhr) {
+            var _, errorList, errors, fieldErrors, fn;
+            if (Math.round(xhr.status / 100) === 2) {
+              $("#file_" + uid).addClass('finished');
+            } else {
+              $("#file_" + uid).addClass('error');
+              if (xhr.status === 422) {
+                errors = JSON.parse(xhr.responseText).errors;
+                errorList = [];
+                fn = function(fieldErrors) {
+                  var fieldError, i, len, results;
+                  results = [];
+                  for (i = 0, len = fieldErrors.length; i < len; i++) {
+                    fieldError = fieldErrors[i];
+                    results.push((function(fieldError) {
+                      return errorList = errorList.concat(fieldError);
+                    })(fieldError));
+                  }
+                  return results;
+                };
+                for (_ in errors) {
+                  if (!hasProp.call(errors, _)) continue;
+                  fieldErrors = errors[_];
+                  fn(fieldErrors);
+                }
+                $('<p/>').addClass('message').text(errorList.join(', ')).appendTo($("#file_" + uid));
+              } else {
+                $('<p/>').addClass('message').text(xhr.statusText).appendTo($("#file_" + uid));
+              }
+            }
+            if (uploader.isFinished() && !uploader.isFailed()) {
+              return window.location.reload();
+            }
+          };
+        })(this),
+        errorHandler: (function(_this) {
+          return function(uid, xhr) {
+            $("#file_" + uid).addClass('error');
+            if (uploader.isFinished() && !uploader.isFailed()) {
+              return window.location.reload();
+            }
+          };
+        })(this)
+      });
+      uploader = element.multiUploader(url, name, options);
+      element.text("Drag files here to upload");
+    }
+
+    return EasyUploader;
+
+  })();
+
+  $.fn.extend({
+    easyUploader: function(url, name, options) {
+      if (options == null) {
+        options = {};
+      }
+      return new EasyUploader(this, url, name, options);
+    }
+  });
+
+}).call(this);
+:ET

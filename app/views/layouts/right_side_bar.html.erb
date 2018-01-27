@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= dynamic_title(yield(:title)) %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+<!--pop-ups-->
+    <%= render '/shared/popup' %>
+
+<!--navbar-->
+    <%= render 'layouts/nav_bar' %>
+<!--/navbar-->
+    
+    <div class="container main">
+
+<!--alerts-->
+      <%= render '/shared/alerts' %>
+<!--/alerts-->
+        
+<!--content--> 
+      <div class="row">
+          <div class="col-8">
+            <%= yield %>
+          </div>
+  <!--sideBar--> 
+          <div class="col-4">
+          </div>
+  <!--/sideBar--> 
+
+      </div>
+<!--/content--> 
+         
+      <footer class="footer-signed-in">
+        <%= render 'layouts/footer' %>
+      </footer> <!-- /.row/footer -->
+    </div><!-- /.container -->
+  </body>
+</html>
