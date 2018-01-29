@@ -19,26 +19,38 @@
 <!--NavBar-->
     <%= render 'layouts/nav_bar' %>
     
-    <% if !signed_in? %>
-      
-      <header class="header">
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <%= yield %>
-            </div>
-          </div>
-        </div>
-      </header>
+    
+<%= yield(:slider) %>
 
-      <footer class="footer"><%= render 'layouts/footer' %></footer> 
 
-    <% else %>
+
       <div class="container main">
-
 <!--alerts-->
       <%= render '/shared/alerts' %>
 <!--/alerts-->      
+      
+      <div class="second-navbar">
+        <div class="second-navbar-item" id="drop-item">
+          <h5>Categories</h5> 
+            <div class="drop" id="drop-1">
+              <ul>
+                <% Category.all.each do |cat| %>
+                  <li class="drop-li"><%= link_to cat.name, category_path(cat) %></li>
+                <% end %>
+              </ul>
+            </div>
+        </div>
+        <div class="second-navbar-item">
+          <a href="#"><h5>Places</h5></a>  
+        </div>
+        <div class="second-navbar-item">
+          <a href="#"><h5>Countries</h5></a>  
+        </div>
+        <div class="second-navbar-item">
+          <a href="#"><h5>TravellHacks</h5></a>  
+        </div>
+      </div>
+
         
            
         <%= yield %>
@@ -47,7 +59,7 @@
         <%= render 'layouts/footer' %>
         </footer> <!-- /.row/footer -->
       </div><!-- /.container -->
-    <% end %>
+   
    
  
 

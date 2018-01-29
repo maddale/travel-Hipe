@@ -1,0 +1,9 @@
+I"ˆ(function() {
+  $(function() {});
+
+  $('.drop-item').click()(function() {
+    return $('#drop-1').slideDown(300);
+  });
+
+}).call(this);
+:ET

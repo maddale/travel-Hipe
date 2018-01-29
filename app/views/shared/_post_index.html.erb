@@ -4,18 +4,18 @@
       <div class="post-head">
         
         <%= render partial: 'shared/tags', object: post, as: "post" %>   
-
+<a href="<%= post_path(post) %>" class="unformated-link">
          <%= post.post_img? ? image_tag(post.post_img.url)  : image_tag("/assets/post_head.jpg") %>
+</a>
       </div>
                 
         
        
        <div class="post-body">
-       <i><p><small>created <%= post.created_at.strftime("%d-%B-%Y") %></small> by <strong><%= post.user.name %></strong></p></i>
+       <i><p class="text-right"><small>created <%= post.created_at.strftime("%d-%B-%Y") %></small> by <strong><%= link_to post.user.name, user_path(post.user) %></strong></p></i>
+<a href="<%= post_path(post) %>" class="unformated-link">
        <h4><strong><%= post.title %></strong></h4>
-        <p class="mb-0"><%= truncate(post.body, length: 240, separatopr: ' ') %></p>
-        <center><%= link_to 'read more', user_post_path(post.user.id, post), class: "text-secondary" %></center>  
        </div>
-       
+</a>
     </div> <!-- /show-content -->
   </div>

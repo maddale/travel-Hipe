@@ -14,7 +14,7 @@
      
      <div class="post-body">
       <p class="mb-0"><%= truncate(post.body, length: 380, separatopr: ' ') %></p>
-      <center><%= link_to 'read more', user_post_path(post.user.id, post), class: "text-secondary" %></center>  
+      <center><%= link_to 'read more', post_path(post), class: "text-secondary" %></center>  
      </div>
      <%= link_to "Edit post", edit_user_post_path(current_user, post), class: "edit-post text-secondary" %>
      

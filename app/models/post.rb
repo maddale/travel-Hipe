@@ -3,8 +3,10 @@ class Post < ApplicationRecord
   
   belongs_to :user
   belongs_to :category
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
+  
+  has_and_belongs_to_many :places
   
   validates :title, presence: true
   validates :body, presence: true

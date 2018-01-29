@@ -1,10 +1,13 @@
 <% provide(:title, 'Home') %>
 
-<% if signed_in? %>
+<% content_for :slider do %>
+  <%= render 'promo_slider' %>
+<% end %>
+
 
 <div class="row">
   
-  <div class="col-9 d-flex wrap pl-0 pr-0">
+  <div class="col-9 d-flex wrap posts-index">
     <%= render partial: "shared/post_index", collection: @posts, as: "post" %>
   </div>
   
@@ -12,12 +15,3 @@
     <%= render "shared/tag_cloud" %>
   </div>
 </div><!--/row-->
-
-
-<% else %>
-  <div class="sample">
-    <h1>Find out how to travel<br>with</h1>
-    <h1 class="display-3">Travel HIPE</h1>
-    <%= link_to "Sign UP", signup_path, class: "btn btn-large btn-outline-light" %>
-  </div>
-<% end %>

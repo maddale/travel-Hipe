@@ -24,7 +24,14 @@ $ ->
       
       this.setAttribute('data-cheked', 'ready')
   
+  $("#drop-item").on 'click', (e) ->
+    $('#drop-1').slideDown(300)
 
+  $("#drop-item").mouseleave ->
+    $('#drop-1').fadeOut(300)
+  
+  # $('.drop-li').on 'click' ->
+  #   $('#drop-1').fadeOut(300)
 
 # $('.delete-message').on 'ajax:success', (event) -> 
 #   console.log 'jkljl'

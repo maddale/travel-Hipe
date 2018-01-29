@@ -36,7 +36,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :icon do
     process :crop
-    resize_to_fit(30, 30)
+    resize_to_fit(50, 50)
   end
 
 version :large do

@@ -1,15 +1,39 @@
 <div class="post">
-    <div class="post-head">
-       <%= render partial: 'shared/tags', object: @post, as: "post" %>
 
-       <%= @post.post_img? ? image_tag(@post.post_img.url) : image_tag("/assets/post_head.jpg") %>
-      <div class="img-footer">
-         <div class="img-footer-left"><h4><strong><%= @post.title %></strong></h4></div>
-         <div class="img-footer-right"><i><p><small>created <%= @post.created_at.strftime("%d-%B-%Y") %></small></p><p>by <strong><%= @post.user.name %></strong></p></i>
-         </div>
+  <div class="post-title">
+    <div class="left">          
+          <div class="post-title-item"><%= image_tag(@post.user.avatar_link(:icon), class: "rounded-circle") %></div>
+          <div class="post-title-item">
+            <p><i><strong><%= @post.user.name %>, </strong><small><%= @post.created_at.strftime("%d %B %Y") %></small></i></p>
+          </div>
       </div>
-    </div> <!-- /imagefooter -->
-     
+      <div class="right">
+          <div class="in">
+              <span class="material-icons">visibility</span><span> 1068</span>
+              <span class="material-icons">thumb_up</span><span> 214</span>
+          </div>
+      </div>
+</div>
+<div class="tags-alone">
+  <div class="tags">
+        <% @post.tags.each do |tag| %>
+          <%= link_to "#"+tag.name, tag_path(tag), class: "badge badge-pill badge-success" %>
+        <% end %>
+</div>
+</div>    
+<h1><strong><%= @post.title %></strong></h1>
+
+  <img src="<%= @post.post_img? ? @post.post_img.url : "/assets/post_head.jpg" %>" alt="" class="post-img">
+        
+  
+
+
+    
+     <!-- /imagefooter -->
+    
+             
+    
+
     <div class="post-body">
       <p class="mb-0"><%= @post.body %></p>
     </div>

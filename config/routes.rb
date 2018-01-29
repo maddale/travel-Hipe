@@ -17,20 +17,18 @@ Rails.application.routes.draw do
 resources :tags, only: [:show, :index] 
 resources :users do
   resources :messages, only: [:new, :create, :index, :destroy]
-  resources :categories, only: [:index, :show]
   resources :photos, only: [:new, :create]
-  resources :posts  
+  resources :posts, only: [:new, :create, :edit, :update, :destroy]
   
     member do
 	get :following, :followers
 	end
 end
 resources :posts, only: [:show, :index]
-resources :categories, only: [:index]
 resources :sessions, only: [:new, :create]
 resources :microposts, only: [:create, :destroy]
 resources :relationships, only: [:create, :destroy]
-
+resources :categories, only: [:index, :show]
 match '/help', to: "static_pages#help" , via: 'get'
 match '/about', to: "static_pages#about" , via: 'get'
 match '/contact', to: "static_pages#contact" , via: 'get'

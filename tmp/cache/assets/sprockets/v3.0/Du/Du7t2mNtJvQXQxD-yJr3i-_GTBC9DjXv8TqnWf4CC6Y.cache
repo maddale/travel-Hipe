@@ -1,0 +1,29 @@
+I"/(function() {
+  $(function() {
+    $('.card-header').click(function() {
+      var currentId, id;
+      id = this.id;
+      currentId = this.getAttribute('data-current-user');
+      if (this.getAttribute('data-cheked')) {
+        $.ajax({
+          url: "/users/" + currentId + "/messages/" + id,
+          type: 'GET',
+          dataType: 'script'
+        });
+        return this.setAttribute('data-cheked', '');
+      } else {
+        $('#collapse-' + id).slideUp(300);
+        $('#message-respond-' + id).slideUp(300);
+        setTimeout(function() {
+          return $('.talk-with-' + id).detach();
+        }, 600);
+        return this.setAttribute('data-cheked', 'ready');
+      }
+    });
+    $("#drop-item").click(function() {});
+    alert('hjk');
+    return $('#drop-1').slideDown(300);
+  });
+
+}).call(this);
+:ET

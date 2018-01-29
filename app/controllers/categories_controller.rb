@@ -5,8 +5,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @posts = User.find(params[:user_id]).categories.find(params[:id]).posts
-    @post  = User.find(params[:user_id]).posts.first
+    
+    @posts = Category.find(params[:id]).posts
+    
   end
 
 end

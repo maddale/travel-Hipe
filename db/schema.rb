@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121134706) do
+ActiveRecord::Schema.define(version: 20180129083155) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -44,6 +44,29 @@ ActiveRecord::Schema.define(version: 20180121134706) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "ident"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "places_for_posts", force: :cascade do |t|
+    t.integer "post_id_id"
+    t.integer "place_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id_id"], name: "index_places_for_posts_on_place_id_id"
+    t.index ["post_id_id"], name: "index_places_for_posts_on_post_id_id"
+    t.index [nil, nil], name: "index_places_for_posts_on_post_id_and_place_id"
+  end
+
+  create_table "places_posts", id: false, force: :cascade do |t|
+    t.string "place_id"
+    t.string "post_id"
+    t.index ["place_id", "post_id"], name: "index_places_posts_on_place_id_and_post_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|

@@ -1,0 +1,10 @@
+I"ž(function() {
+  $(function() {});
+
+  $('.drop-item').click(function() {
+    console.log('hjk');
+    return $('#drop-1').slideDown(300);
+  });
+
+}).call(this);
+:ET

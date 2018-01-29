@@ -1,7 +1,10 @@
-<div class="row">
-<%= render 'shared/user_side' %>
-
-  <div class="col-9">
-  <%= render @posts %>
+ <div class="row">
+  
+  <div class="col-9 d-flex wrap posts-index">
+    <%= render partial: "shared/post_index", collection: @posts, as: "post" %>
   </div>
-</div>
+  
+  <div class="col-3">
+    <%= render "shared/tag_cloud" %>
+  </div>
+</div><!--/row-->

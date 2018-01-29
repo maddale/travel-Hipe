@@ -3,31 +3,30 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+
+
+
 .post-medium {      /*--- using in users layout*/
 background-color: white;
 border: 1px solid rgba(0, 0, 0, 0.125);
 border-radius: 0.25rem;
 margin-bottom: 10px;
 position: relative;
-    img {
-    min-width: 100%;
-    width: 100%;
-  }
 }
 
-.post {       /*--- using in full layout*/
-  img {
-    min-width: 100%;
-    width: 100%;
-  }
-}
+
+/*--- using in full layout*/
 
 .post-head {
     overflow: hidden;
     width: 100%;
     position: relative;
     max-height: 200px;
-
+  img {
+    min-width: 100%;
+    width: 100%;
+  }
     .f-field{
     position: absolute;
     top: 50%;
@@ -110,3 +109,70 @@ position: relative;
       color: #404040;
     text-decoration: underline;
 }
+
+
+//     posts-index
+
+.posts-index {
+  padding-left: 5px !Important;
+  padding-right: 5px !Important;
+}
+
+// full size post
+.post-title {
+  padding: 10px 10px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .right {
+      display: flex;
+    p {
+      margin: 0;
+  }
+    .in {
+      display: flex;
+      font-size: 12px;
+      color: gray;  
+      align-items: center;
+  }
+    .material-icons {
+      font-size: 16px;
+      margin-left: 20px;
+      margin-right: 5px;
+  }
+  }
+}
+
+.post-title-item {
+  display: inline-block;
+  
+}
+
+.post-img {
+  width: 100%;
+}
+
+/*----post-form----*/
+.selected-places {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 0 15px 0;
+  white-space: nowrap;
+}
+.bage-place {
+  padding: 5px;
+  border-radius: 3px;
+  margin: 10px 10px 0 0;
+  .close-b {
+    cursor: pointer;
+    font-size: 18px;
+    color: inherit;
+  }
+  .close-b:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
