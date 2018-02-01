@@ -161,13 +161,21 @@ position: relative;
   white-space: nowrap;
 }
 .bage-place {
-  padding: 5px;
+  padding: 5px 10px 5px 30px;
   border-radius: 3px;
   margin: 10px 10px 0 0;
+  position: relative;
+  .material-icons {
+    font-size: 24px !Important;
+    top: 6px;
+    left: 5px;
+    position: absolute;
+  }
   .close-b {
     cursor: pointer;
     font-size: 18px;
     color: inherit;
+    margin: auto 5px;
   }
   .close-b:hover {
     text-decoration: none;
@@ -175,4 +183,24 @@ position: relative;
   }
 }
 
+#map-search {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  top: 10px;
+  left: 150px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 28px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
 

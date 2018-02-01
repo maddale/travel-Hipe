@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   layout "right_side_bar"
-
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -28,18 +28,26 @@ class PostsController < ApplicationController
 
   def show
   
-  @post = Post.find(params[:id])
-
+    @post = Post.find(params[:id])
+    @places = @post.places
   end
 
   def edit
     @post = Post.find(params[:id])  
+    @places = @post.places
   end
 
   def update
     
     @post = Post.find(params[:id])
-    @user = @post.user   
+    places_params = params[:places]
+
+    @post.places.clear
+    places_params.keys.each do |key|
+      @post.places << Place.where(ident: places_params[key][:ident]).first_or_create do |new_place|
+        new_place.name = places_params[key][:name]
+      end
+    end
 
     if @post.update_attributes(post_params)
       redirect_to user_path(@user) 
@@ -60,5 +68,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :post_img, :category_id, :all_tags)
+  end
+
+  def correct_user
+    @user = User.find(params[:user_id])
+    unless current_user?(@user)
+      flash[:danger] = "Access to this post is denied."
+      redirect_to root_path
+    end
   end
 end

@@ -15,6 +15,7 @@
 //= require jquery.Jcrop
 //= require popper
 //= require bootstrap-sprockets
+//= require dist/trix
 //= require_tree . 
 
 

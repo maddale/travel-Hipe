@@ -23,6 +23,17 @@
 </div>    
 <h1><strong><%= @post.title %></strong></h1>
 
+
+  <div id="map" class="map"></div>
+
+  <div class="selected-places">
+    <% @places.each do |place| %>
+      <span class="bage-place badge-success" id="<%= place.ident %>"><i class="material-icons">location_on</i><%= place.name %></span>
+    <% end %>
+  </div>
+
+
+
   <img src="<%= @post.post_img? ? @post.post_img.url : "/assets/post_head.jpg" %>" alt="" class="post-img">
         
   
@@ -40,3 +51,36 @@
      
     <p class="text-secondary">Edit post</p>
   </div>
+<script>
+  function initMap() {
+        $('#map').fadeIn(300);
+        $('#map-search').fadeIn(300);
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 5.5451263, lng: -0.20336109999993823},
+          zoom: 13
+        });
+        var elements = document.getElementsByClassName('bage-place');
+        // google.maps.event.addListenerOnce(map, 'idle', function() {  });
+        var bounds = new google.maps.LatLngBounds();
+
+        for (i=0; i < elements.length; i++) {
+          var request = {placeId: elements[i].getAttribute('id')}
+          service = new google.maps.places.PlacesService(map);
+          service.getDetails(request, callback);
+
+          function callback(place) {
+            var marker = new google.maps.Marker({
+              position: place.geometry.location,
+              map: map
+            });
+            bounds.extend(marker.getPosition());
+            map.fitBounds(bounds);
+          };
+        }
+
+      }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2Ki5JBDAOEfBGsXm8buk4Kw4MbGuPp0&language=en&callback=initMap&libraries=places"></script>
+

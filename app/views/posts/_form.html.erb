@@ -2,14 +2,29 @@
 
 <%= render 'shared/forms_errors', object: @post %>
 
-<a href="#" onclick="initMap()">Select places</a>
   
   <div class="selected-places">
+    <% @places.each_with_index do |place, index| %>
+      <span class="bage-place badge-success" data-place-id="<%= place.ident %>" id="<%= index %>"><i class="material-icons">location_on</i><%= place.name %>
+        <span class="close-b" id="close-<%= index %>">&times;</span>
+      </span>
+    <% end %>
   </div>
     
-    <div id="new-places">
-    
-    </div>
+  <div id="new-places">
+  
+    <% @post.places.each_with_index do |place, index| %>
+      <%= fields_for "places[place#{index}]", place do |f_p| %>
+        <div id="places-item-<%= index %>">
+          <%= f_p.hidden_field :name %>
+          <%= f_p.hidden_field :ident %>
+        </div>    
+      <% end %>
+    <% end %>
+
+
+  </div>
+
 
   <div class="form-group">
     <%= f.label :title %>
@@ -18,7 +33,8 @@
   
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control", rows: 5 %>
+    <%= f.hidden_field :body, class: "form-control", id: "x", rows: 5 %>
+    <trix-editor input="x"></trix-editor>
   </div>
 
   <div class="form-group">

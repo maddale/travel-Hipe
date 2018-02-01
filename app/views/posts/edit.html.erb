@@ -1,51 +1,177 @@
 <script>
+    // Adding upload button to Trix toolbar on initialization
+    document.addEventListener('trix-initialize', function(e) {
+        trix = e.target;
+        toolBar = trix.toolbarElement;
+
+        // Creation of the button
+        button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.setAttribute("class", "trix-button trix-button--icon trix-button--icon-location");
+        button.setAttribute("data-trix-action", "x-attach");
+        button.setAttribute("title", "Location");
+        button.setAttribute("tabindex", "-1");
+        button.innerText = "Location";
+
+        // Attachment of the button to the toolBar
+        uploadButton = toolBar.querySelector('.trix-button-group--text-tools').appendChild(button);
+});
+
+
+
       
       
       function initMap() {
         $('#map').fadeIn(300);
+        $('#map-search').fadeIn(300);
+
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 0, lng: 0},
-          zoom: 3
+          center: {lat: 5.5451263, lng: -0.20336109999993823},
+          // zoom: 13
         });
-        var n = 0;
-        map.addListener('click', function(e) {
-             e.stop();
-             request = {placeId: e.placeId}
-             service = new google.maps.places.PlacesService(map);
-             
-             service.getDetails(request, function(PlaceResult, PlacesServiceStatus) {
-              if (google.maps.places.PlacesServiceStatus.OK) {
-                $('#new-places').append('<div id="places-item-' + n + '"><input value="' + PlaceResult.name + '" type="hidden" name="places[place-' + n + '][name]" id="place' + n + '_name"><input value="' + e.placeId + '" type="hidden" name="places[place-' + n + '][ident]" id="place' + n + '_name"></div>');
-                $('.selected-places').append('<span class="bage-place badge-success" id="' + n + '">' + PlaceResult.name + '<span class="close-b" onclick="hide(this)">&nbsp&nbsp&times;</span></span>');
-              }
-               
-               else {
-                alert('Ooops! Smth is wrong... Please try again.');
+        var n;
+        var markers = [];
+        // google.maps.event.addListenerOnce(map, 'idle', function() { map.fitBounds(bounds); });
+        
+        var elements = document.getElementsByClassName('bage-place');
+        var bounds = new google.maps.LatLngBounds();
 
-               }
-             
-                n += 1;
-             }); 
-        });
+        //fill - in the markers on the map
+        for (i=0; i < elements.length; i++) {
+          var ident = elements[i].getAttribute('data-place-id');
+          n = elements[i].getAttribute('id');
+          var request = {placeId: ident} 
+          //set the "remover" to the <span> element
+          document.getElementById('close-' + i).addEventListener("click", function() {
+            var id = $(this).parent().attr('id')
+            $(this).parent().detach();
+            removeMarker(id);
+            $('#places-item-' + id).detach();
+          });
+          //recieving the place data and setting markers
+          service = new google.maps.places.PlacesService(map);
+          service.getDetails(request, function(place) {
+            var marker = new google.maps.Marker({
+              position: place.geometry.location,
+              map: map
+            });
+            markers.push(marker);
+            bounds.extend(marker.getPosition());
+            map.fitBounds(bounds);
+          });
+          
+          
+        }
 
+        
+
+
+      function removeMarker(ident) {
+        var marker = markers[ident];
+        marker.setMap(null);
+        markers[ident] = null;
       }
 
-      function hide(el) {
-        var id = $(el).parent().attr('id');
-        $(el).parent().detach();
-        $('#places-item-' + id).detach();
 
-      } 
+
+
+
+        // listen for clicking on the icons to add a place
+        map.addListener('click', function(e) {
+             e.stop();
+             var request = {placeId: e.placeId}
+             var n = markers.length;
+             service = new google.maps.places.PlacesService(map);
+             
+
+             service.getDetails(request, function(PlaceResult, PlacesServiceStatus) {
+              if (google.maps.places.PlacesServiceStatus.OK) {
+                if (markers.some(function(m) {
+                  if (m == null) {
+                    return false
+                  }
+                  else {
+                  return m.getPosition().lat() === PlaceResult.geometry.location.lat() && m.getPosition().lng() === PlaceResult.geometry.location.lng()
+                  }})){
+                alert('This place has been already added.')
+                }
+                else {
+                  $('#new-places').append('<div id="places-item-' + n + '"><input value="' + PlaceResult.name + '" type="hidden" name="places[place' + n + '][name]" id="places_place' + n + '_name"><input value="' + e.placeId + '" type="hidden" name="places[place' + n + '][ident]" id="places_place' + n + '_ident"></div>');
+                  $('.selected-places').append('<span class="bage-place badge-success" data-place-id="' + e.placeId + '" id="' + n + '"><i class="material-icons">location_on</i>' + PlaceResult.name + '<span class="close-b" id="close-' + n + '">&times;</span></span>');
+                
+                // add a marker
+                addMarker(PlaceResult.geometry.location);
+                
+                // add an event listener with detach function
+                var elem = document.getElementById('close-' + n + '');
+                elem.addEventListener("click", function() {
+                  var id = $(this).parent().attr('id');
+                  removeMarker(id);
+                  $(this).parent().detach();
+                  $('#places-item-' + id).detach();
+                });
+              }
+              }
+               else {
+                alert('Ooops! Smth is wrong... Please try again later. We are already fixing this))');
+               }
+             // end of IF
+                 n += 1;
+             
+              function addMarker(location) {
+                var marker = new google.maps.Marker ({position: location, map: map});  
+                markers.push(marker);
+              };
+
+              
+             }); //end of request 
+        });
+
+        var input = document.getElementById('map-search');
+        var options = {
+          // placeIdOnly: true
+        };
+
+
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          // alert(place.geometry.location);
+          map.setCenter(place.geometry.location);
+          map.setZoom(12);
+          // marker.setPlace({location: place.geometry.location, placeId: place.place_id});
+          var infowindow = new google.maps.InfoWindow({content: 'Click on the place icon to add it to the post.'});
+          infowindow.setPosition(place.geometry.location);
+          infowindow.open(map);
+
+
+        });
+      }
+
+      // var elem = document.getElementById('jepa');
+      // elem.addEventListener("click", function() {alert('works!')});
+
+
+
+
+      function hide(el) {
+          var id = $(el).parent().attr('id');
+          $(el).parent().detach();
+          $('#places-item-' + id).detach();
+          
+        }
       
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2Ki5JBDAOEfBGsXm8buk4Kw4MbGuPp0&&libraries=places"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2Ki5JBDAOEfBGsXm8buk4Kw4MbGuPp0&language=en&callback=initMap&libraries=places"></script>
 
 
 <h1>Edit your post</h1>
 
 <div class="row">
-  <div class="col-8">
+  <div class="col-10">
+  <input type="text" id="map-search" placeholder="Enter place name">
 <div id="map" class="map"></div>
     <%= render 'form' %>    
   </div>
