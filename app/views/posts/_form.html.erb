@@ -3,13 +3,7 @@
 <%= render 'shared/forms_errors', object: @post %>
 
   
-  <div class="selected-places">
-    <% @places.each_with_index do |place, index| %>
-      <span class="bage-place badge-success" data-place-id="<%= place.ident %>" id="<%= index %>"><i class="material-icons">location_on</i><%= place.name %>
-        <span class="close-b" id="close-<%= index %>">&times;</span>
-      </span>
-    <% end %>
-  </div>
+
     
   <div id="new-places">
   
@@ -21,11 +15,20 @@
         </div>    
       <% end %>
     <% end %>
-
-
   </div>
 
-
+    <% if @post.post_img.nil? %>
+      <div class="post-title">
+        <%= image_tag(@post.post_img.url, class: "post-img") %>
+      </div>    
+    <% else %>
+      <div class="post-title-edit">
+        <h3>Customize your post with head image!</h3>
+        <h5>Just select an image from your gallery or upload a new one</h5>
+        <a href="<%= gallery_path(@user, @post) %>" class="btn btn-secondary" id="get-image" data-remote=true>get image</a>
+      </div>
+    <% end %>
+  
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control"%>
@@ -33,7 +36,7 @@
   
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.hidden_field :body, class: "form-control", id: "x", rows: 5 %>
+    <%= f.hidden_field :body, class: "form-control", id: "x" %>
     <trix-editor input="x"></trix-editor>
   </div>
 
@@ -48,5 +51,7 @@
   </div>
 
 
-  <%= f.submit "Edit", class: "btn btn-success" %>
+  <%= f.submit "#{@sign}", class: "btn btn-success" %>
 <% end %>
+
+

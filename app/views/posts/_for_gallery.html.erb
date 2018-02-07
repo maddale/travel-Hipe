@@ -1,0 +1,12 @@
+<div id="selected-photo"></div>
+
+<div class="gallery upload">
+      <% @photos.each do |photo| %>
+      <div class="position-relative">
+        <%= image_tag(photo.picture_url(:thumb), class: "gallery-item") %>
+        <div class="bef">
+          <a href="#" onclick="PhotoPickUp(event, '<%= photo.picture_url %>')">Add this photo</a>
+        </div>
+      </div>
+      <% end %>
+</div>

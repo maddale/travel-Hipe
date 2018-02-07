@@ -1,9 +1,0 @@
-I"™(function() {
-  $(function() {
-    return $('.yeah').on("ajax:success", function(event) {
-      return console.log(event);
-    });
-  });
-
-}).call(this);
-:ET

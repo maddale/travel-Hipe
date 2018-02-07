@@ -1,10 +1,12 @@
 class MessagesController < ApplicationController
+layout "user_with_right_side_bar", only: [:index, :show]
 before_action :correct_user
 
 def index
     @user = User.find(params[:user_id])
     @photos = @user.photos.order(created_at: :desc)
     @messages = current_user.messages.order(updated_at: :desc)
+    @categories = @user.categories.uniq 
     senders_respondents = @messages.map(&:sender_id) + @messages.map(&:respondent_id)
 
       @users = senders_respondents.uniq.map do |sender|

@@ -27,7 +27,7 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 5.5451263, lng: -0.20336109999993823},
-          // zoom: 13
+          zoom: 13
         });
         var n;
         var markers = [];
@@ -36,6 +36,7 @@
         var elements = document.getElementsByClassName('bage-place');
         var bounds = new google.maps.LatLngBounds();
 
+        if (elements.length != 0) {
         //fill - in the markers on the map
         for (i=0; i < elements.length; i++) {
           var ident = elements[i].getAttribute('data-place-id');
@@ -59,10 +60,9 @@
             bounds.extend(marker.getPosition());
             map.fitBounds(bounds);
           });
-          
-          
+                 
         }
-
+        }
         
 
 
@@ -97,7 +97,7 @@
                 }
                 else {
                   $('#new-places').append('<div id="places-item-' + n + '"><input value="' + PlaceResult.name + '" type="hidden" name="places[place' + n + '][name]" id="places_place' + n + '_name"><input value="' + e.placeId + '" type="hidden" name="places[place' + n + '][ident]" id="places_place' + n + '_ident"></div>');
-                  $('.selected-places').append('<span class="bage-place badge-success" data-place-id="' + e.placeId + '" id="' + n + '"><i class="material-icons">location_on</i>' + PlaceResult.name + '<span class="close-b" id="close-' + n + '">&times;</span></span>');
+                  $('.selected-places').append('<span class="bage-place" data-place-id="' + e.placeId + '" id="' + n + '">' + PlaceResult.name + '<span class="close-b" id="close-' + n + '">&times;</span></span>');
                 
                 // add a marker
                 addMarker(PlaceResult.geometry.location);
@@ -166,14 +166,22 @@
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2Ki5JBDAOEfBGsXm8buk4Kw4MbGuPp0&language=en&callback=initMap&libraries=places"></script>
 
+<%= content_for :top do %>
+  <h1 class="mb-0">Edit your post</h1>
+<% end %>
 
-<h1>Edit your post</h1>
-
-<div class="row">
-  <div class="col-10">
+<%= content_for :maps do %>
   <input type="text" id="map-search" placeholder="Enter place name">
-<div id="map" class="map"></div>
-    <%= render 'form' %>    
+  <div id="map" class="map"></div>
+
+  <div class="selected-places">
+    <% @places.each_with_index do |place, index| %>
+      <span class="bage-place" data-place-id="<%= place.ident %>" id="<%= index %>"><%= place.name %>
+        <span class="close-b" id="close-<%= index %>">&times;</span>
+      </span>
+    <% end %>
   </div>
-</div>
+<% end %>
+  
+<%= render 'form' %>    
 

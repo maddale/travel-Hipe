@@ -1,9 +1,0 @@
-I"Ÿ(function() {
-  $(function() {
-    return $('#jepa').on("ajax:success", function(event) {
-      return alert('ajax is success');
-    });
-  });
-
-}).call(this);
-:ET

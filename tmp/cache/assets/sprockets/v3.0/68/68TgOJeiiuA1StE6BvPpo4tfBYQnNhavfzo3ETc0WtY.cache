@@ -1,9 +1,0 @@
-I"¤(function() {
-  $(function() {
-    return $('.yeah').on("ajax:success", function(e, data, status, xhr) {
-      return console.log(e);
-    });
-  });
-
-}).call(this);
-:ET

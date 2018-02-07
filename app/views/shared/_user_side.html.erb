@@ -4,16 +4,16 @@
       <img class="card-img-top" src="/assets/user_back.jpg" alt="Card image cap">
       <div class="card-body">
         <div class="avatar-plate">
-          <img src="<%= @user.avatar.url(:thumb) %>" class="avatar" alt="ddd">
+          <img src="<%= @user.avatar_link(:thumb) %>" class="avatar" alt="ddd">
         <div class="new-ava" data-toggle="tooltip" data-placement="top" title="Click to change avatar"><a href="<%= user_edit_avatar_path(current_user) %>" data-remote="true"><i class="material-icons">local_see</i></a></div> 
 
         </div>
-        <h5 class="card-title"><%= current_user.name %></h5>
+        <h5 class="card-title"><%= @user.name %></h5>
         <%= render 'shared/stats' %>
 
         <ul>
-          <li><p class="card-text">Posts:  <strong><a href="#">16</a></strong></p></li>
-          <li><p class="card-text">Places <strong><a href="#">64</a></strong></p></li>
+          <li><p class="card-text">Posts:  <strong><a href="#"><%= @user.posts.count %></a></strong></p></li>
+          <li><p class="card-text">Places <strong><a href="#"><%= @user.places.count %></a></strong></p></li>
           <li><p class="card-text">Countries:  <strong><a href="#">23</a></strong></p></li>
           <li><p class="card-text">Routs:  <strong><a href="#">6</a></strong></p></li>
           <li><p class="card-text">Photos:  <strong><a href="#">18</a></strong></p></li>
@@ -23,16 +23,4 @@
       </div>
     </div>
 
-  <div class="card text-center">
-    
-  <div class="gallery-head">
-    <span class="material-icons"><%= link_to 'add_a_photo', new_user_photo_path(current_user) %></span> 
-    <h5>Gallery</h5>
-  </div>
-    
-    <div class="gallery">
-      <% @photos[0..5].each do |photo| %>
-        <%= image_tag(photo.picture_url(:thumb), class: "gallery-item") %>
-      <% end %>
-    </div>
-  </div>
+  

@@ -1,9 +1,4 @@
 
-<div class="row mesage-index">
-<%= render 'shared/user_side' %>
-
-  <div class="col-6">
-
 <% @users.each do |user| %>  
   <% if user != current_user %>
   <div class="card message-head" id="card-<%= user.id %>">
@@ -37,5 +32,3 @@
 
       <% end %>
     <% end %>
-  </div>
-</div>

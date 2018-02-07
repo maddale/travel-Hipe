@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129083155) do
+ActiveRecord::Schema.define(version: 20180206045008) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -53,20 +56,12 @@ ActiveRecord::Schema.define(version: 20180129083155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "places_for_posts", force: :cascade do |t|
-    t.integer "post_id_id"
-    t.integer "place_id_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["place_id_id"], name: "index_places_for_posts_on_place_id_id"
-    t.index ["post_id_id"], name: "index_places_for_posts_on_post_id_id"
-    t.index [nil, nil], name: "index_places_for_posts_on_post_id_and_place_id"
-  end
-
   create_table "places_posts", id: false, force: :cascade do |t|
-    t.string "place_id"
-    t.string "post_id"
+    t.bigint "place_id"
+    t.bigint "post_id"
     t.index ["place_id", "post_id"], name: "index_places_posts_on_place_id_and_post_id", unique: true
+    t.index ["place_id"], name: "index_places_posts_on_place_id"
+    t.index ["post_id"], name: "index_places_posts_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -77,6 +72,7 @@ ActiveRecord::Schema.define(version: 20180129083155) do
     t.datetime "updated_at", null: false
     t.string "post_img"
     t.integer "category_id"
+    t.integer "shows", default: 0
     t.index ["category_id"], name: "index_posts_on_category_id"
   end
 
@@ -91,8 +87,8 @@ ActiveRecord::Schema.define(version: 20180129083155) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "tag_id"
+    t.bigint "post_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_taggings_on_post_id"
@@ -119,4 +115,6 @@ ActiveRecord::Schema.define(version: 20180129083155) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "taggings", "posts"
+  add_foreign_key "taggings", "tags"
 end

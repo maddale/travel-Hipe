@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   layout "right_side_bar"
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy, :gallery]
 
   def index
     @posts = Post.all
@@ -10,7 +10,10 @@ class PostsController < ApplicationController
   end
 
   def new
-  @post = current_user.posts.build
+    @sign = "Create new post"
+    @post = current_user.posts.build
+    @places = @post.places
+    render "edit"
   end
 
   def create
@@ -27,18 +30,19 @@ class PostsController < ApplicationController
   end
 
   def show
-  
     @post = Post.find(params[:id])
     @places = @post.places
+    @post.increment(:shows)
+    @post.save
   end
 
   def edit
+    @sign = "Edit post"
     @post = Post.find(params[:id])  
     @places = @post.places
   end
 
   def update
-    
     @post = Post.find(params[:id])
     places_params = params[:places]
 
@@ -50,9 +54,8 @@ class PostsController < ApplicationController
     end
 
     if @post.update_attributes(post_params)
-      redirect_to user_path(@user) 
+      redirect_to post_path(@post) 
     else
-#    @posts = current_user.posts.order(created_at: :desc)
       render 'edit'
     end
   
@@ -63,6 +66,13 @@ class PostsController < ApplicationController
   redirect_to root_path
   end
 
+  def gallery
+    
+    @photos = @user.photos 
+    respond_to do |format|
+      format.js
+    end
+  end
 
   private
 

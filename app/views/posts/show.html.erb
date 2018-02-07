@@ -1,18 +1,24 @@
 <div class="post">
 
   <div class="post-title">
+    <img src="<%= @post.post_img? ? @post.post_img.url : "/assets/post_head.jpg" %>" alt="" class="post-img">
+    <div class="post-statistic">
     <div class="left">          
           <div class="post-title-item"><%= image_tag(@post.user.avatar_link(:icon), class: "rounded-circle") %></div>
           <div class="post-title-item">
-            <p><i><strong><%= @post.user.name %>, </strong><small><%= @post.created_at.strftime("%d %B %Y") %></small></i></p>
+            <h5><strong><%= @post.user.name %></strong></h5>
+            <span class="time-stamp"><%= @post.created_at.strftime("%d %B %Y") %></span>
           </div>
       </div>
       <div class="right">
           <div class="in">
-              <span class="material-icons">visibility</span><span> 1068</span>
-              <span class="material-icons">thumb_up</span><span> 214</span>
+             <span class="material-icons">edit</span><%= link_to "Edit post", edit_user_post_path(current_user, @post), class: "edit-post text-secondary" if @post.user.id == current_user.id %>
+            <span class="material-icons">location_on</span><span><%= @post.places.count %></span>
+            <span class="material-icons">visibility</span><span><%= @post.shows %></span>
+            <span class="material-icons">thumb_up</span><span> 214</span>
           </div>
       </div>
+  </div>
 </div>
 <div class="tags-alone">
   <div class="tags">
@@ -24,17 +30,9 @@
 <h1><strong><%= @post.title %></strong></h1>
 
 
-  <div id="map" class="map"></div>
-
-  <div class="selected-places">
-    <% @places.each do |place| %>
-      <span class="bage-place badge-success" id="<%= place.ident %>"><i class="material-icons">location_on</i><%= place.name %></span>
-    <% end %>
-  </div>
 
 
-
-  <img src="<%= @post.post_img? ? @post.post_img.url : "/assets/post_head.jpg" %>" alt="" class="post-img">
+  
         
   
 
@@ -42,14 +40,14 @@
     
      <!-- /imagefooter -->
     
-             
-    
-
     <div class="post-body">
-      <p class="mb-0"><%= @post.body %></p>
+      <p class="mb-0"><%= @post.body.html_safe %></p>
     </div>
      
     <p class="text-secondary">Edit post</p>
+             
+    
+
   </div>
 <script>
   function initMap() {
@@ -81,6 +79,18 @@
 
       }
 </script>
+
+<%= content_for :maps do %>
+  
+  <div id="map" class="map"></div>
+
+  <div class="selected-places">
+    <% @places.each do |place| %>
+      <span class="bage-place" id="<%= place.ident %>"><%= place.name %></span>
+    <% end %>
+  </div>
+<% end %>
+
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe2Ki5JBDAOEfBGsXm8buk4Kw4MbGuPp0&language=en&callback=initMap&libraries=places"></script>
 

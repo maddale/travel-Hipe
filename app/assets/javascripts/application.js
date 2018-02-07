@@ -16,6 +16,8 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require dist/trix
+//= require load-image.all.min.js
+
 //= require_tree . 
 
 

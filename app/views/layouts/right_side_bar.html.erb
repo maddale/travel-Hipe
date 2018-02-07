@@ -27,12 +27,18 @@
 <!--/alerts-->
         
 <!--content--> 
+<div class="row">
+          <div class="col-12 post-layout">      
+      <%= yield(:top) %>
+</div>
+</div>
       <div class="row">
-          <div class="col-10">
+          <div class="col-8 post-layout pr-0">
             <%= yield %>
           </div>
   <!--sideBar--> 
-          <div class="col-2">
+          <div class="col-4 post-layout">
+            <%= yield(:maps) %>
           </div>
   <!--/sideBar--> 
 

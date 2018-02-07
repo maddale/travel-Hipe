@@ -1,14 +1,8 @@
-<div class="row">
-  <%= render 'shared/user_side' %>
 
-  <div class="col-7">
     <%= form_for(@user) do |f| %>
       <%= render 'user_form', f: f %>
       <%= f.submit 'Edit profile', class: "btn btn-large btn-primary" %>
     <% end %>
-  </div><!--/col7-->
-
-</div><!--/row-->
 
 
 

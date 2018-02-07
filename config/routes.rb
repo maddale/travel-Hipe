@@ -41,6 +41,6 @@ get 'users/:id/edit_avatar', to: "users#edit_avatar", as: :user_edit_avatar
 get 'users/:user_id/messages/:opp_id', to: "messages#show", as: :user_talk
 patch 'users/:id/update_avatar', to: "users#update_avatar"
 patch 'users/:id/resize_avatar', to: "users#resize_avatar"
-
+get 'users/:user_id/posts/:id/gallery', to:"posts#gallery", as: :gallery
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

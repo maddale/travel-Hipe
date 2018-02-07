@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :categories, through: :posts
   has_many :photos, dependent: :destroy
+  has_many :places, through: :posts
 
   has_many :outboxes, foreign_key: "sender_id", class_name: "Message"
   has_many :inboxes, foreign_key: "respondent_id", class_name: "Message"
