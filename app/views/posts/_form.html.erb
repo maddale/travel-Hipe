@@ -17,17 +17,24 @@
     <% end %>
   </div>
 
-    <% if @post.post_img.nil? %>
-      <div class="post-title">
-        <%= image_tag(@post.post_img.url, class: "post-img") %>
-      </div>    
-    <% else %>
+    <% if @post.post_img.url.nil? %>
       <div class="post-title-edit">
         <h3>Customize your post with head image!</h3>
         <h5>Just select an image from your gallery or upload a new one</h5>
         <a href="<%= gallery_path(@user, @post) %>" class="btn btn-secondary" id="get-image" data-remote=true>get image</a>
+      </div>    
+    <% else %>
+      <div class="post-title">
+        <%= image_tag(@post.post_img.url, class: "post-img") %>
       </div>
     <% end %>
+
+    <%= text_field_tag(:coord_x) %>
+    <%= text_field_tag(:coord_y) %>
+    <%= text_field_tag(:coord_w) %>
+    <%= text_field_tag(:coord_h) %>
+  
+
   
   <div class="form-group">
     <%= f.label :title %>

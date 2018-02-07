@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     @places = @post.places
   end
 
-  def update
+  def pdate
     @post = Post.find(params[:id])
     places_params = params[:places]
 

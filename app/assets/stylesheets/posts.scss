@@ -218,6 +218,15 @@
     justify-content: center;
     margin-bottom: 10px;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+#picked-image {
+  position:absolute;
+  z-index: 99;
+  
 }
 
     
