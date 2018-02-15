@@ -1,9 +1,0 @@
-I"Ž(function() {
-  $(function() {
-    return $('#testlink').on(click, function(event) {
-      return alert('www');
-    });
-  });
-
-}).call(this);
-:ET

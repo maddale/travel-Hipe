@@ -1,9 +1,0 @@
-I"‡(function() {
-  $(function() {
-    return $(document.body).click(function() {
-      return alert('hjk');
-    });
-  });
-
-}).call(this);
-:ET

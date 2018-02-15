@@ -1,9 +1,0 @@
-I"Ž(function() {
-  $(function() {
-    return $('.message-head').click(function() {
-      return console.log(this);
-    });
-  });
-
-}).call(this);
-:ET

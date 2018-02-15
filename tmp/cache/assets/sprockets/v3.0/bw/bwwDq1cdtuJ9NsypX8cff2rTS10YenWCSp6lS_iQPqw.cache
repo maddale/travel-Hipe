@@ -1,9 +1,0 @@
-I"‰(function() {
-  $(function() {
-    return $('#collapse81').click()(function() {
-      return alert('hjk');
-    });
-  });
-
-}).call(this);
-:ET

@@ -1,9 +1,0 @@
-I"“(function() {
-  $(function() {
-    return $('.card-header').click(function(event) {
-      return console.log(event);
-    });
-  });
-
-}).call(this);
-:ET
